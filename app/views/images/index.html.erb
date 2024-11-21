@@ -1,0 +1,11 @@
+<h1>Images Index</h1>
+<%= link_to 'Add image', new_image_path %>
+
+<ul>
+  <% @images.each do |image| %>
+    <li>
+      <p><%= image.image_name %></p>
+      <%= image_tag image.file %>
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,17 @@
+<h1>Add Image</h1>
+
+<%= form_with model: @image, local: true do |form| %>
+  <div>
+    <%= form.label :image_name %>
+    <%= form.text_field :image_name %>
+  </div>
+
+  <div>
+    <%= form.label :file %>
+    <%= form.file_field :file %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
