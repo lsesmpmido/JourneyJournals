@@ -144,6 +144,7 @@ GEM
       net-smtp
     marcel (1.0.4)
     matrix (0.4.2)
+    mini_magick (5.0.1)
     mini_mime (1.1.5)
     minitest (5.25.1)
     msgpack (1.7.5)
@@ -330,6 +331,7 @@ DEPENDENCIES
   erb_lint
   importmap-rails
   jbuilder
+  mini_magick
   puma (>= 5.0)
   rails (~> 7.2.1)
   rubocop-fjord
