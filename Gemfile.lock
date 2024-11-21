@@ -235,6 +235,9 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.36.1)
       parser (>= 3.3.1.0)
+    rubocop-fjord (0.3.0)
+      rubocop (>= 1.0)
+      rubocop-performance
     rubocop-minitest (0.36.0)
       rubocop (>= 1.61, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
@@ -329,6 +332,8 @@ DEPENDENCIES
   jbuilder
   puma (>= 5.0)
   rails (~> 7.2.1)
+  rubocop-fjord
+  rubocop-rails
   rubocop-rails-omakase
   selenium-webdriver
   sprockets-rails
