@@ -1,0 +1,35 @@
+<h1>Image Details</h1>
+
+<p>
+  <strong>Image Name:</strong>
+  <%= @image.image_name %>
+</p>
+
+<p>
+  <strong>Memo:</strong>
+  <%= @image.memo %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @image.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @image.longitude %>
+</p>
+
+<p>
+  <strong>Captured At:</strong>
+  <%= @image.captured_at %>
+</p>
+
+<% if @image.file.attached? %>
+  <p>
+    <strong>Image:</strong>
+    <%= image_tag @image.file, class: "fixed-height-image" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back to Images', images_path %>

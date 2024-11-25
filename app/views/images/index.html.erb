@@ -4,8 +4,7 @@
 <ul>
   <% @images.each do |image| %>
     <li>
-      <p><%= image.image_name %></p>
-      <%= image_tag image.file %>
+      <%= link_to image.image_name, image_path(image) %>
     </li>
   <% end %>
 </ul>

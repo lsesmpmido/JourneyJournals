@@ -5,12 +5,17 @@ class ImagesController < ApplicationController
     @images = Image.all
   end
 
+  def show
+    @image = Image.find(params[:id])
+  end
+
   def new
     @image = Image.new
   end
 
   def create
     @image = Image.new(image_params)
+    @image.image_name = @image.file.filename.to_s
 
     if @image.save
       redirect_to root_url, notice: 'Add Image'
