@@ -1,35 +1,34 @@
-<h1>Image Details</h1>
+<h1><%= t('views.common.title_show', name: i18n_pluralize(Image.model_name.human)) %></h1>
 
 <p>
-  <strong>Image Name:</strong>
+  <strong><%= Image.human_attribute_name(:image_name) %>:</strong>
   <%= @image.image_name %>
 </p>
 
 <p>
-  <strong>Memo:</strong>
+  <strong><%= Image.human_attribute_name(:memo) %>:</strong>
   <%= @image.memo %>
 </p>
 
 <p>
-  <strong>Latitude:</strong>
+  <strong><%= Image.human_attribute_name(:latitude) %>:</strong>
   <%= @image.latitude %>
 </p>
 
 <p>
-  <strong>Longitude:</strong>
+  <strong><%= Image.human_attribute_name(:longitude) %>:</strong>
   <%= @image.longitude %>
 </p>
 
 <p>
-  <strong>Captured At:</strong>
+  <strong><%= Image.human_attribute_name(:date_of_shooting) %>:</strong>
   <%= @image.date_of_shooting %>
 </p>
 
 <% if @image.file.attached? %>
   <p>
-    <strong>Image:</strong>
     <%= image_tag @image.file, class: "fixed-height-image" %>
   </p>
 <% end %>
 
-<%= link_to 'Back to Images', images_path %>
+<%= link_to t('views.common.back', name: i18n_pluralize(Image.model_name.human)), images_path %>

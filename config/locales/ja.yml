@@ -1,0 +1,37 @@
+ja:
+  activerecord:
+    models:
+      image: 写真
+    attributes:
+      image:
+        image_name: 写真の名前
+        memo: メモ
+        latitude: 緯度
+        longitude: 経度
+        date_of_shooting: 撮影日時
+
+  views:
+    common:
+      show: "この%{name}を表示"
+      edit: "この%{name}を編集"
+      destroy: "この%{name}を削除"
+      new: "%{name}の新規作成"
+      back: "%{name}の一覧に戻る"
+      delete_confirm: よろしいですか？
+      title_index: "%{name}の一覧"
+      title_new: "%{name}の新規作成"
+      title_edit: "%{name}の編集"
+      title_show: "%{name}の詳細"
+      error: エラー
+      validation_error: "%{errors}があるため、この%{name}は保存できませんでした"
+    pagination:
+      first: '« 最初'
+      last: '最後 »'
+      previous: '‹ 前'
+      next: '次 ›'
+      truncate: '…'
+  controllers:
+    common:
+      notice_create: "%{name}が作成されました。"
+      notice_update: "%{name}が更新されました。"
+      notice_destroy: "%{name}が削除されました。"

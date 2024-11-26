@@ -1,4 +1,4 @@
-<h1>Add Image</h1>
+<h1><%= t('views.common.title_new', name: i18n_pluralize(Image.model_name.human)) %></h1>
 
 <%= form_with model: @image, local: true do |form| %>
   <div>

@@ -1,5 +1,5 @@
-<h1>Images Index</h1>
-<%= link_to 'Add image', new_image_path %>
+<h1><%= t('views.common.title_index', name: i18n_pluralize(Image.model_name.human)) %></h1>
+<%= link_to t('views.common.new', name: i18n_pluralize(Image.model_name.human)), new_image_path %>
 
 <ul>
   <% @images.each do |image| %>
