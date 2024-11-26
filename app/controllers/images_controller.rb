@@ -65,13 +65,15 @@ class ImagesController < ApplicationController
   end
 
   def convert_to_decimal(degree_string)
-    # 例: "31 13 51.9400000000023"（度 分 秒）
-    parts = degree_string.split(' ')
-    degrees = parts[0].to_f
-    minutes = parts[1].to_f / 60
-    seconds = parts[2].to_f / 3600
+    parts = degree_string.split
+    degrees = parts[0].to_i
+    minutes = parts[2].delete("'").to_i
+    seconds = parts[3].delete('"').to_f
+    direction = parts[4]
 
-    # 小数に変換
-    degrees + minutes + seconds
+    decimal = degrees + (minutes / 60.0) + (seconds / 3600.0)
+    decimal = -decimal if %w[S W].include?(direction)
+
+    decimal.round(4)
   end
 end
