@@ -5,7 +5,7 @@ class CreateImages < ActiveRecord::Migration[7.2]
       t.text :memo
       t.float :latitude
       t.float :longitude
-      t.datetime :captured_at
+      t.datetime :date_of_shooting
 
       t.timestamps
     end

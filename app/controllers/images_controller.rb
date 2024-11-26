@@ -29,8 +29,8 @@ class ImagesController < ApplicationController
           @image.latitude = convert_to_decimal(latitude)
           @image.longitude = convert_to_decimal(longitude)
         end
-        captured_at = exif.date_time_original || exif.create_date
-        @image.captured_at = captured_at.in_time_zone('Asia/Tokyo') if captured_at
+        date_of_shooting = exif.date_time_original || exif.create_date
+        @image.date_of_shooting = date_of_shooting.in_time_zone('Asia/Tokyo') if date_of_shooting
         @image.save
       end
       redirect_to root_url, notice: 'Add Image'
@@ -42,7 +42,7 @@ class ImagesController < ApplicationController
   private
 
   def image_params
-    params.fetch(:image, {}).permit(:image_name, :memo, :file, :latitude, :longitude, :captured_at)
+    params.fetch(:image, {}).permit(:image_name, :memo, :file, :latitude, :longitude, :date_of_shooting)
   end
 
   # Active StorageのファイルからEXIF情報を取得するメソッド
