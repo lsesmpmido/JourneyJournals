@@ -3,8 +3,9 @@
 
 <ul>
   <% @images.each do |image| %>
-    <li>
-      <%= link_to image.image_name, image_path(image) %>
-    </li>
+    <%= link_to image_path(image) do %>
+      <%= image_tag image.file, alt: image.image_name, class: "fixed-height-image" %>
+    <% end %>
+    <br>
   <% end %>
 </ul>
