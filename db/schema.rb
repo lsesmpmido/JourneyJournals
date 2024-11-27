@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_21_061617) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_27_173256) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -45,10 +45,20 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_21_061617) do
     t.float "latitude"
     t.float "longitude"
     t.datetime "date_of_shooting"
+    t.integer "journal_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["journal_id"], name: "index_images_on_journal_id"
+  end
+
+  create_table "journals", force: :cascade do |t|
+    t.string "journal_name"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "images", "journals"
 end

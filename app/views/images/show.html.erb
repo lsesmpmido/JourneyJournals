@@ -1,4 +1,4 @@
-<h1><%= t('views.common.title_show', name: i18n_pluralize(Image.model_name.human)) %></h1>
+<h1><%= t('views.common.title_show', name: Image.model_name.human) %></h1>
 
 <p>
   <strong><%= Image.human_attribute_name(:image_name) %>:</strong>
@@ -33,7 +33,7 @@
 <%= javascript_include_tag 'show_map' %>
 
 <nav class="page-nav">
-  <%= link_to t('views.common.back', name: i18n_pluralize(Image.model_name.human)), images_path %> |
-  <%= link_to t('views.common.edit', name: Image.model_name.human.downcase), edit_image_path(@image) %>
+  <%= link_to t('views.common.back', name: Image.model_name.human.downcase), images_path %> |
+  <%= link_to t('views.common.edit', name: i18n_pluralize(Image.model_name.human.downcase)), edit_image_path(@image) %>
   <%= button_to t('views.common.destroy', name: Image.model_name.human.downcase), image_path(@image), method: :delete, data: { turbo: false, confirm: "Are you sure?" } %>
 </nav>

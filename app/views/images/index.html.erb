@@ -1,11 +1,12 @@
 <h1><%= t('views.common.title_index', name: i18n_pluralize(Image.model_name.human)) %></h1>
-<%= link_to t('views.common.new', name: i18n_pluralize(Image.model_name.human)), new_image_path %>
+<%= link_to t('views.common.new', name: Image.model_name.human.downcase), new_image_path(journal_id: params[:journal_id]) %>
 
 <ul>
   <% @images.each do |image| %>
     <%= link_to image_path(image) do %>
       <%= image_tag image.file, alt: image.image_name, class: "fixed-height-image" %>
     <% end %>
+    <%= button_to t('views.common.destroy', name: Image.model_name.human.downcase), image_path(image), method: :delete, data: { confirm: 'Are you sure?' } %>
     <br>
   <% end %>
 </ul>

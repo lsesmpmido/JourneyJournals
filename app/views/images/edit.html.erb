@@ -1,4 +1,4 @@
-<h1><%= t('views.common.title_edit', name: i18n_pluralize(Image.model_name.human)) %></h1>
+<h1><%= t('views.common.title_edit', name: Image.model_name.human.downcase) %></h1>
 
 <%= form_with model: @image, local: true do |form| %>
   <% if @image.errors.any? %>

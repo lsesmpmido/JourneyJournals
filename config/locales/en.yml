@@ -1,31 +1,42 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      journal: Journal
+      image: Image
+    attributes:
+      journal:
+        journal_name: Journal name
+        description: Description
+      image:
+        image_name: Image name
+        memo: Memo
+        latitude: Latitude
+        longitude: Longitude
+        date_of_shooting: Date of shooting
+        location_of_shooting: Location of shooting
+
+  views:
+    common:
+      show: "Show this %{name}"
+      edit: "Edit this %{name}"
+      destroy: "Destroy this %{name}"
+      new: "New %{name}"
+      back: "Back to %{name}"
+      delete_confirm: "Are you sure?"
+      title_index: "%{name}"
+      title_new: "New %{name}"
+      title_edit: "Editing %{name}"
+      title_show: "%{name}"
+      error: error
+      validation_error: "%{errors} prohibited this %{name} from being saved"
+    pagination:
+      first: '« First'
+      last: 'Last »'
+      previous: '‹ Previous'
+      next: 'Next ›'
+      truncate: '…'
+  controllers:
+    common:
+      notice_create: "%{name} was successfully created."
+      notice_update: "%{name} was successfully updated."
+      notice_destroy: "%{name} was successfully destroyed."

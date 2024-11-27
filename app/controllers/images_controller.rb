@@ -7,7 +7,11 @@ class ImagesController < ApplicationController
   before_action :set_image, only: %i[show edit update destroy]
 
   def index
-    @images = Image.all
+    @images = if params[:journal_id]
+                Image.where(journal_id: params[:journal_id]).includes(:journal)
+              else
+                Image.all.includes(:journal)
+              end
   end
 
   def show; end
@@ -35,7 +39,7 @@ class ImagesController < ApplicationController
         @image.date_of_shooting = date_of_shooting.in_time_zone('Asia/Tokyo') if date_of_shooting
         @image.save
       end
-      redirect_to images_path, notice: 'Add Image'
+      redirect_to journal_images_path(@image.journal_id), notice: 'Image was successfully added.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -64,7 +68,7 @@ class ImagesController < ApplicationController
   end
 
   def image_params
-    params.fetch(:image, {}).permit(:image_name, :memo, :file, :latitude, :longitude, :date_of_shooting)
+    params.require(:image).permit(:image_name, :memo, :file, :latitude, :longitude, :date_of_shooting, :journal_id)
   end
 
   # Active StorageのファイルからEXIF情報を取得するメソッド

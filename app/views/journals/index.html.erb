@@ -1,0 +1,12 @@
+<h1><%= t('views.common.title_index', name: i18n_pluralize(Journal.model_name.human)) %></h1>
+<%= link_to t('views.common.new', name: Journal.model_name.human.downcase), new_journal_path %>
+
+<ul>
+  <% @journals.each do |journal| %>
+    <%= Journal.human_attribute_name(:journal_name) %>: <%= journal.journal_name %><br>
+    <%= Journal.human_attribute_name(:description) %>: <%= journal.description %><br>
+    <%= link_to t('views.common.show', name: Journal.model_name.human.downcase), journal %> |
+    <%= link_to t('views.common.edit', name: Journal.model_name.human.downcase), edit_journal_path(journal) %>
+    <%= button_to t('views.common.destroy', name: Journal.model_name.human.downcase), journal, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+  <% end %>
+</ul>

@@ -1,0 +1,30 @@
+<h1><%= t('views.common.title_new', name: Journal.model_name.human.downcase) %></h1>
+
+<%= form_with(model: @journal, local: true) do |form| %>
+  <div>
+    <%= form.label :journal_name %>
+    <%= form.text_field :journal_name %>
+  </div>
+
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <h3><%= i18n_pluralize(Image.model_name.human) %></h3>
+  <%= form.fields_for :images do |image_form| %>
+    <div>
+      <%= image_form.label :file %>
+      <%= image_form.file_field :file %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<nav class="page-nav">
+  <%= link_to t('views.common.show', name: Journal.model_name.human.downcase), @journal %> |
+  <%= link_to t('views.common.back', name: i18n_pluralize(Journal.model_name.human.downcase)), journals_path %>
+</nav>

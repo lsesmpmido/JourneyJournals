@@ -1,4 +1,4 @@
-<h1><%= t('views.common.title_new', name: i18n_pluralize(Image.model_name.human)) %></h1>
+<h1><%= t('views.common.title_new', name: Image.model_name.human.downcase) %></h1>
 
 <%= form_with model: @image, local: true do |form| %>
   <div>
@@ -6,7 +6,14 @@
     <%= form.file_field :file %>
   </div>
 
+  <%= form.hidden_field :journal_id, value: params[:journal_id] %>
+
   <div>
     <%= form.submit %>
   </div>
 <% end %>
+
+<nav class="page-nav">
+  <%= link_to t('views.common.show', name: Image.model_name.human.downcase), @image %> |
+  <%= link_to t('views.common.back', name: i18n_pluralize(Image.model_name.human.downcase)), images_path %>
+</nav>

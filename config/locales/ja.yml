@@ -1,8 +1,12 @@
 ja:
   activerecord:
     models:
+      journal: ジャーナル
       image: 写真
     attributes:
+      journal:
+        journal_name: ジャーナルの名前
+        description: 説明文
       image:
         image_name: 写真の名前
         memo: メモ
