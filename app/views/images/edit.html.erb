@@ -1,0 +1,53 @@
+<h1><%= t('views.common.title_edit', name: i18n_pluralize(Image.model_name.human)) %></h1>
+
+<%= form_with model: @image, local: true do |form| %>
+  <% if @image.errors.any? %>
+    <div class="error_messages">
+      <h2><%= t('errors.messages.any') %></h2>
+      <ul>
+        <% @image.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :image_name %>
+    <%= form.text_field :image_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :memo %>
+    <%= form.text_area :memo, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :latitude %>
+    <%= form.text_field :latitude, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :longitude %>
+    <%= form.text_field :longitude, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :date_of_shooting %>
+    <%= form.datetime_local_field :date_of_shooting, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :file %>
+    <%= form.file_field :file, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<nav class="page-nav">
+  <%= link_to t('views.common.show', name: Image.model_name.human.downcase), @image %> |
+  <%= link_to t('views.common.back', name: i18n_pluralize(Image.model_name.human.downcase)), images_path %>
+</nav>

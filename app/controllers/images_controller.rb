@@ -4,17 +4,19 @@ require 'mini_exiftool'
 require 'time'
 
 class ImagesController < ApplicationController
+  before_action :set_image, only: %i[show edit update destroy]
+
   def index
     @images = Image.all
   end
 
-  def show
-    @image = Image.find(params[:id])
-  end
+  def show; end
 
   def new
     @image = Image.new
   end
+
+  def edit; end
 
   def create
     @image = Image.new(image_params)
@@ -33,13 +35,33 @@ class ImagesController < ApplicationController
         @image.date_of_shooting = date_of_shooting.in_time_zone('Asia/Tokyo') if date_of_shooting
         @image.save
       end
-      redirect_to root_url, notice: 'Add Image'
+      redirect_to images_path, notice: 'Add Image'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
+  def update
+    respond_to do |_format|
+      if @image.update(image_params)
+        redirect_to @image, notice: t('controllers.common.notice_update', name: Image.model_name.human)
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
+  end
+
+  def destroy
+    @image.destroy
+
+    redirect_to images_path, notice: t('controllers.common.notice_destroy', name: Image.model_name.human)
+  end
+
   private
+
+  def set_image
+    @image = Image.find(params[:id])
+  end
 
   def image_params
     params.fetch(:image, {}).permit(:image_name, :memo, :file, :latitude, :longitude, :date_of_shooting)

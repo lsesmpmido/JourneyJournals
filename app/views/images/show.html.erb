@@ -11,16 +11,6 @@
 </p>
 
 <p>
-  <strong><%= Image.human_attribute_name(:latitude) %>:</strong>
-  <%= @image.latitude %>
-</p>
-
-<p>
-  <strong><%= Image.human_attribute_name(:longitude) %>:</strong>
-  <%= @image.longitude %>
-</p>
-
-<p>
   <strong><%= Image.human_attribute_name(:date_of_shooting) %>:</strong>
   <%= @image.date_of_shooting %>
 </p>
@@ -31,10 +21,12 @@
   </p>
 <% end %>
 
-<p>
-  <strong>Map:</strong>
-</p>
-<div id="map" style="width: 100%; height: 400px;"></div>
+<% if @image.latitude && @image.longitude %>
+  <p>
+    <strong>Map:</strong>
+  </p>
+  <div id="map" style="width: 400px; height: 400px;"></div>
+<% end %>
 
 <script>
   function initMap() {
@@ -56,4 +48,8 @@
   }
 </script>
 
-<%= link_to t('views.common.back', name: i18n_pluralize(Image.model_name.human)), images_path %>
+<nav class="page-nav">
+  <%= link_to t('views.common.back', name: i18n_pluralize(Image.model_name.human)), images_path %> |
+  <%= link_to t('views.common.edit', name: Image.model_name.human.downcase), edit_image_path(@image) %>
+  <%= button_to t('views.common.destroy', name: Image.model_name.human.downcase), image_path(@image), method: :delete, data: { turbo: false, confirm: "Are you sure?" } %>
+</nav>
