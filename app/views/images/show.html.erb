@@ -23,30 +23,14 @@
 
 <% if @image.latitude && @image.longitude %>
   <p>
-    <strong>Map:</strong>
+    <strong><%= Image.human_attribute_name(:location_of_shooting) %>:</strong>
   </p>
   <div id="map" style="width: 400px; height: 400px;"></div>
+  <input type="hidden" id="latitude" value="<%= @image.latitude %>">
+  <input type="hidden" id="longitude" value="<%= @image.longitude %>">
 <% end %>
 
-<script>
-  function initMap() {
-    var latitude = <%= @image.latitude.to_json %>;
-    var longitude = <%= @image.longitude.to_json %>;
-
-    // 地図の初期設定（例えば、特定の座標に中心を設定）
-    var map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: latitude, lng: longitude},
-      zoom: 10
-    });
-
-    // マーカーを地図に追加
-    var marker = new google.maps.Marker({
-      position: {lat: latitude, lng: longitude},
-      map: map,
-      title: "東京"
-    });
-  }
-</script>
+<%= javascript_include_tag 'show_map' %>
 
 <nav class="page-nav">
   <%= link_to t('views.common.back', name: i18n_pluralize(Image.model_name.human)), images_path %> |

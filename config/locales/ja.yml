@@ -9,6 +9,7 @@ ja:
         latitude: 緯度
         longitude: 経度
         date_of_shooting: 撮影日時
+        location_of_shooting: 撮影場所
 
   views:
     common:
