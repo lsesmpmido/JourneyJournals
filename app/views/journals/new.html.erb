@@ -25,6 +25,5 @@
 <% end %>
 
 <nav class="page-nav">
-  <%= link_to t('views.common.show', name: Journal.model_name.human.downcase), @journal %> |
   <%= link_to t('views.common.back', name: i18n_pluralize(Journal.model_name.human.downcase)), journals_path %>
 </nav>

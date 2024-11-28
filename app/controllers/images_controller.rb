@@ -71,22 +71,17 @@ class ImagesController < ApplicationController
     params.require(:image).permit(:image_name, :memo, :file, :latitude, :longitude, :date_of_shooting, :journal_id)
   end
 
-  # Active StorageのファイルからEXIF情報を取得するメソッド
   def extract_exif_from_image(image)
-    # Active Storageのファイルを一時的にローカルに保存
     file = image.file.download
 
-    # 一時ファイルを作成
     tmp_file = Tempfile.new(['exif', '.jpg'])
     tmp_file.binmode
     tmp_file.write(file)
     tmp_file.rewind
 
-    # Exif情報をMiniExiftoolで読み取る
     exif = MiniExiftool.new(tmp_file.path)
-    tmp_file.close # 一時ファイルを閉じる
+    tmp_file.close
 
-    # 位置情報を取得
     exif
   end
 
