@@ -21,7 +21,8 @@ ja:
       edit: "この%{name}を編集"
       destroy: "この%{name}を削除"
       new: "%{name}の新規作成"
-      back: "%{name}の一覧に戻る"
+      back_index: "%{name}の一覧に戻る"
+      back_show: "%{name}の詳細に戻る"
       delete_confirm: よろしいですか？
       title_index: "%{name}の一覧"
       title_new: "%{name}の新規作成"

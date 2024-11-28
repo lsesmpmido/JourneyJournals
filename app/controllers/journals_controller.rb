@@ -8,7 +8,7 @@ class JournalsController < ApplicationController
   end
 
   def show
-    redirect_to images_path(journal_id: @journal.id)
+    @images = @journal.images.includes(:journal)
   end
 
   def new

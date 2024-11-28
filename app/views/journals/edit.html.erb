@@ -24,20 +24,11 @@
   </div>
 
   <div>
-    <%= form.fields_for :images do |image_fields| %>
-      <div>
-        <%= image_fields.label :file %>
-        <%= image_fields.file_field :file %>
-      </div>
-    <% end %>
-  </div>
-
-  <div>
     <%= form.submit %>
   </div>
 <% end %>
 
 <nav class="page-nav">
-  <%= link_to t('views.common.show', name: Journal.model_name.human.downcase), @journal %> |
-  <%= link_to t('views.common.back', name: i18n_pluralize(Journal.model_name.human.downcase)), journals_path %>
+  <%= link_to t('views.common.back_show', name: Journal.model_name.human.downcase), @journal %> |
+  <%= link_to t('views.common.back_index', name: i18n_pluralize(Journal.model_name.human.downcase)), journals_path %>
 </nav>

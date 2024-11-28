@@ -43,6 +43,5 @@
 <%= javascript_include_tag 'edit_map' %>
 
 <nav class="page-nav">
-  <%= link_to t('views.common.show', name: Image.model_name.human.downcase), @image %> |
-  <%= link_to t('views.common.back', name: i18n_pluralize(Image.model_name.human.downcase)), images_path %>
+  <%= link_to t('views.common.back_show', name: Image.model_name.human.downcase), @image %>
 </nav>

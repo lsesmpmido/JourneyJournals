@@ -33,7 +33,8 @@
 <%= javascript_include_tag 'show_map' %>
 
 <nav class="page-nav">
-  <%= link_to t('views.common.back', name: Image.model_name.human.downcase), images_path %> |
+  <%= link_to t('views.common.show', name: Journal.model_name.human.downcase), journal_path %>
+  <%= link_to t('views.common.back_index', name: Image.model_name.human.downcase), images_path %> |
   <%= link_to t('views.common.edit', name: i18n_pluralize(Image.model_name.human.downcase)), edit_image_path(@image) %>
   <%= button_to t('views.common.destroy', name: Image.model_name.human.downcase), image_path(@image), method: :delete, data: { turbo: false, confirm: "Are you sure?" } %>
 </nav>

@@ -7,11 +7,7 @@ class ImagesController < ApplicationController
   before_action :set_image, only: %i[show edit update destroy]
 
   def index
-    @images = if params[:journal_id]
-                Image.where(journal_id: params[:journal_id]).includes(:journal)
-              else
-                Image.all.includes(:journal)
-              end
+    @images = Image.all.includes(:journal)
   end
 
   def show; end
