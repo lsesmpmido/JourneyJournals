@@ -13,6 +13,7 @@ class ImagesController < ApplicationController
   def show; end
 
   def new
+    @journal = Journal.find(params[:journal_id])
     @image = Image.new
   end
 
@@ -35,7 +36,7 @@ class ImagesController < ApplicationController
         @image.date_of_shooting = date_of_shooting.in_time_zone('Asia/Tokyo') if date_of_shooting
         @image.save
       end
-      redirect_to journal_images_path(@image.journal_id), notice: 'Image was successfully added.'
+      redirect_to journal_path(@image.journal_id), notice: 'Image was successfully added.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -54,7 +55,7 @@ class ImagesController < ApplicationController
   def destroy
     @image.destroy
 
-    redirect_to images_path, notice: t('controllers.common.notice_destroy', name: Image.model_name.human)
+    redirect_to journal_path(@image.journal_id), notice: t('controllers.common.notice_destroy', name: Image.model_name.human)
   end
 
   private

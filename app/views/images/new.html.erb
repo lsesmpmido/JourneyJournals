@@ -14,5 +14,5 @@
 <% end %>
 
 <nav class="page-nav">
-  <%= link_to t('views.common.back_index', name: i18n_pluralize(Image.model_name.human.downcase)), images_path %>
+  <%= link_to t('views.common.back_show', name: i18n_pluralize(Journal.model_name.human.downcase)), journal_path(params[:journal_id]) %>
 </nav>

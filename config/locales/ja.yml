@@ -20,7 +20,7 @@ ja:
       show: "この%{name}を表示"
       edit: "この%{name}を編集"
       destroy: "この%{name}を削除"
-      new: "%{name}の新規作成"
+      new: "%{name}の追加"
       back_index: "%{name}の一覧に戻る"
       back_show: "%{name}の詳細に戻る"
       delete_confirm: よろしいですか？
@@ -31,11 +31,11 @@ ja:
       error: エラー
       validation_error: "%{errors}があるため、この%{name}は保存できませんでした"
     pagination:
-      first: '« 最初'
-      last: '最後 »'
-      previous: '‹ 前'
-      next: '次 ›'
-      truncate: '…'
+      first: "« 最初"
+      last: "最後 »"
+      previous: "‹ 前"
+      next: "次 ›"
+      truncate: "…"
   controllers:
     common:
       notice_create: "%{name}が作成されました。"

@@ -2,7 +2,7 @@
 <%= Journal.human_attribute_name(:journal_name) %>: <%= @journal.journal_name %><br>
 <%= Journal.human_attribute_name(:description) %>: <%= @journal.description %><br>
 
-<%= link_to t('views.common.new', name: Image.model_name.human.downcase), new_image_path(journal_id: params[:journal_id]) %>
+<%= link_to t('views.common.new', name: Image.model_name.human.downcase), new_journal_image_path(@journal) %>
 
 <ul>
   <% @images.each do |image| %>
