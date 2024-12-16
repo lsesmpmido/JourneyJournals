@@ -12,7 +12,9 @@
 
 <p>
   <strong><%= Image.human_attribute_name(:date_of_shooting) %>:</strong>
-  <%= @image.date_of_shooting %>
+  <% if @image.date_of_shooting %>
+    <%= @image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H:%M") %>
+  <% end %>
 </p>
 
 <% if @image.file.attached? %>

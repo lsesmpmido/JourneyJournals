@@ -33,7 +33,7 @@ class ImagesController < ApplicationController
           @image.longitude = convert_to_decimal(longitude)
         end
         date_of_shooting = exif.date_time_original || exif.create_date
-        @image.date_of_shooting = date_of_shooting.in_time_zone('Asia/Tokyo') if date_of_shooting
+        @image.date_of_shooting = date_of_shooting if date_of_shooting
         @image.save
       end
       redirect_to journal_path(@image.journal_id), notice: 'Image was successfully added.'
