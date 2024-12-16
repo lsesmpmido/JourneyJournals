@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'mini_exiftool'
+
 class JournalsController < ApplicationController
   before_action :set_journal, only: %i[show edit update destroy]
 
@@ -21,20 +23,7 @@ class JournalsController < ApplicationController
   def create
     @journal = Journal.new(journal_params)
     if @journal.save
-      @journal.images.each do |image|
-        exif = extract_exif_from_image(image)
-        next unless exif
-
-        latitude = exif.gpslatitude
-        longitude = exif.gpslongitude
-        if latitude && longitude
-          image.latitude = convert_to_decimal(latitude)
-          image.longitude = convert_to_decimal(longitude)
-        end
-        date_of_shooting = exif.date_time_original || exif.create_date
-        image.date_of_shooting = date_of_shooting.in_time_zone('Asia/Tokyo') if date_of_shooting
-        image.save
-      end
+      process_images(@journal.images)
       redirect_to @journal, notice: 'Journal and Image were successfully created.'
     else
       render :new
@@ -64,6 +53,15 @@ class JournalsController < ApplicationController
     params.require(:journal).permit(:journal_name, :description, images_attributes: [:file])
   end
 
+  def process_images(images)
+    images.each do |image|
+      exif = extract_exif_from_image(image)
+      next unless exif
+
+      update_image_with_exif(image, exif)
+    end
+  end
+
   def extract_exif_from_image(image)
     file = image.file.download
 
@@ -76,6 +74,19 @@ class JournalsController < ApplicationController
     tmp_file.close
 
     exif
+  end
+
+  def update_image_with_exif(image, exif)
+    latitude = exif.gpslatitude
+    longitude = exif.gpslongitude
+    if latitude && longitude
+      image.latitude = convert_to_decimal(latitude)
+      image.longitude = convert_to_decimal(longitude)
+    end
+
+    date_of_shooting = exif.date_time_original || exif.create_date
+    image.date_of_shooting = date_of_shooting if date_of_shooting
+    image.save
   end
 
   def convert_to_decimal(degree_string)
