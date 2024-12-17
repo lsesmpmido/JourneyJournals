@@ -40,7 +40,9 @@
   </div>
 <% end %>
 
-<%= javascript_include_tag 'edit_map' %>
+<% content_for :scripts do %>
+  <%= javascript_include_tag "images/edit_map" %>
+<% end %>
 
 <nav class="page-nav">
   <%= link_to t('views.common.back_show', name: Image.model_name.human.downcase), @image %>

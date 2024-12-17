@@ -23,6 +23,7 @@
       <%= link_to i18n_pluralize(Journal.model_name.human), journals_path %> |
       <%= link_to i18n_pluralize(Image.model_name.human), images_path %>
     </nav>
+    <%= yield :scripts %>
     <%= yield %>
   </body>
 </html>

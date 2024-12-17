@@ -32,7 +32,9 @@
   <input type="hidden" id="longitude" value="<%= @image.longitude %>">
 <% end %>
 
-<%= javascript_include_tag 'show_map' %>
+<% content_for :scripts do %>
+  <%= javascript_include_tag "images/show_map" %>
+<% end %>
 
 <nav class="page-nav">
   <%= link_to t('views.common.show', name: Journal.model_name.human.downcase), journal_path(@image.journal) %> |
