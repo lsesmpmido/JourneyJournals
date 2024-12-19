@@ -3,7 +3,7 @@
 <ul>
   <% @images.each do |image| %>
     <%= link_to image_path(image) do %>
-      <%= image_tag image.file, alt: image.image_name, class: "fixed-height-image" %>
+      <%= image_tag image.file, alt: image.image_name, class: "fixed-height-image", loading: "lazy" %>
     <% end %>
     <%= button_to t('views.common.destroy', name: Image.model_name.human.downcase), image_path(image), method: :delete, data: { confirm: 'Are you sure?' } %>
     <br>
