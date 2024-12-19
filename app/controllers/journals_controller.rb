@@ -10,7 +10,10 @@ class JournalsController < ApplicationController
   end
 
   def show
-    @images = @journal.images.includes(:journal)
+    @images = @journal.images.includes(:journal).order(:date_of_shooting)
+    @locations = @images.map do |image|
+      { lat: image.latitude, lng: image.longitude } if image.latitude && image.longitude
+    end.compact
   end
 
   def new

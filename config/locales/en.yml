@@ -13,15 +13,19 @@ en:
         latitude: Latitude
         longitude: Longitude
         date_of_shooting: Date of shooting
-        location_of_shooting: Location of shooting
 
   views:
+    image:
+      location_of_shooting: Location of shooting
+    journal:
+      activity_record: Activity record
     common:
       show: "Show this %{name}"
       edit: "Edit this %{name}"
       destroy: "Destroy this %{name}"
       new: "New %{name}"
-      back: "Back to %{name}"
+      back_index: "Back to %{name}"
+      back_show: "Back to %{name}"
       delete_confirm: "Are you sure?"
       title_index: "%{name}"
       title_new: "New %{name}"
@@ -30,11 +34,11 @@ en:
       error: error
       validation_error: "%{errors} prohibited this %{name} from being saved"
     pagination:
-      first: '« First'
-      last: 'Last »'
-      previous: '‹ Previous'
-      next: 'Next ›'
-      truncate: '…'
+      first: "« First"
+      last: "Last »"
+      previous: "‹ Previous"
+      next: "Next ›"
+      truncate: "…"
   controllers:
     common:
       notice_create: "%{name} was successfully created."

@@ -13,9 +13,12 @@ ja:
         latitude: 緯度
         longitude: 経度
         date_of_shooting: 撮影日時
-        location_of_shooting: 撮影場所
 
   views:
+    image:
+      location_of_shooting: 撮影場所
+    journal:
+      activity_record: 行動記録
     common:
       show: "この%{name}を表示"
       edit: "この%{name}を編集"

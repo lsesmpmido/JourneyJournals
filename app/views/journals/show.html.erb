@@ -4,6 +4,32 @@
 
 <%= link_to t('views.common.new', name: Image.model_name.human.downcase), new_journal_image_path(@journal) %>
 
+<h2><%= t('views.journal.activity_record') %></h2>
+<% if @locations %>
+  <div id="map" style="width: 400px; height: 400px;"
+      data-locations="<%= @locations.to_json %>"></div>
+
+  <% content_for :scripts do %>
+    <%= javascript_include_tag "journals/show_route_map" %>
+  <% end %>
+<% end %>
+<ul>
+  <% @images.each do |image| %>
+    <li>
+      <%= link_to image_path(image) do %><%= image.image_name %><% end %><br>
+      <% if image.date_of_shooting %>
+        <strong><%= t(Image.human_attribute_name(:date_of_shooting)) %>:</strong>
+        <%= image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %>
+      <% end %>
+      <% if image.latitude && image.longitude %>
+        <strong><%= t('views.image.location_of_shooting') %>:</strong>
+        <%= "(#{image.latitude}, #{image.longitude})" %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<h2><%= Image.model_name.human %></h2>
 <ul>
   <% @images.each do |image| %>
     <%= link_to image_path(image) do %>

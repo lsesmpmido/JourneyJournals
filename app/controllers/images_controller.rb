@@ -21,19 +21,14 @@ class ImagesController < ApplicationController
 
   def create
     @image = Image.new(image_params)
-    @image.image_name = @image.file.filename.to_s
+    @image.image_name = @image.image_name.presence || @image.file.filename.to_s
 
     if @image.save
       exif = extract_exif_from_image(@image)
       if exif
-        latitude = exif.gpslatitude
-        longitude = exif.gpslongitude
-        if latitude && longitude
-          @image.latitude = convert_to_decimal(latitude)
-          @image.longitude = convert_to_decimal(longitude)
-        end
-        date_of_shooting = exif.date_time_original || exif.create_date
-        @image.date_of_shooting = date_of_shooting if date_of_shooting
+        @image.latitude = convert_to_decimal(exif.gpslatitude)
+        @image.longitude = convert_to_decimal(exif.gpslongitude)
+        @image.date_of_shooting = exif.date_time_original || exif.create_date
         @image.save
       end
       redirect_to journal_path(@image.journal_id), notice: 'Image was successfully added.'

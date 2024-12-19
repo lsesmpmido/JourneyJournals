@@ -24,11 +24,15 @@
 
   <div class="form-group">
     <%= form.label :date_of_shooting, style: "display: block" %>
-    <%= form.datetime_local_field :date_of_shooting, class: "form-control" %>
+    <% if @image.date_of_shooting %>
+      <%= form.datetime_local_field :date_of_shooting, class: "form-control", value: @image.date_of_shooting.in_time_zone("Asia/Tokyo").strftime('%Y-%m-%dT%H:%M') %>
+    <% else %>
+      <%= form.datetime_local_field :date_of_shooting, class: "form-control" %>
+    <% end %>
   </div>
 
   <div class="form-group">
-    <%= form.label :location_of_shooting, style: "display: block" %>
+    <%= form.label t('views.image.location_of_shooting'), style: "display: block" %>
     <%= form.text_field :latitude, id: "latitude", class: "form-control", style: "display: none;" %>
     <%= form.text_field :longitude, id: "longitude", class: "form-control", style: "display: none;" %>
   </div>
@@ -41,7 +45,7 @@
 <% end %>
 
 <% content_for :scripts do %>
-  <%= javascript_include_tag "images/edit_map" %>
+  <%= javascript_include_tag "images/edit_shooting_map" %>
 <% end %>
 
 <nav class="page-nav">

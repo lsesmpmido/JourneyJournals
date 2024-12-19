@@ -13,7 +13,7 @@
 <p>
   <strong><%= Image.human_attribute_name(:date_of_shooting) %>:</strong>
   <% if @image.date_of_shooting %>
-    <%= @image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H:%M") %>
+    <%= @image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %>
   <% end %>
 </p>
 
@@ -25,7 +25,7 @@
 
 <% if @image.latitude && @image.longitude %>
   <p>
-    <strong><%= Image.human_attribute_name(:location_of_shooting) %>:</strong>
+    <strong><%= t('views.image.location_of_shooting') %>:</strong>
   </p>
   <div id="map" style="width: 400px; height: 400px;"></div>
   <input type="hidden" id="latitude" value="<%= @image.latitude %>">
@@ -33,7 +33,7 @@
 <% end %>
 
 <% content_for :scripts do %>
-  <%= javascript_include_tag "images/show_map" %>
+  <%= javascript_include_tag "images/show_shooting_map" %>
 <% end %>
 
 <nav class="page-nav">
