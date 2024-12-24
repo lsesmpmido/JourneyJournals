@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    keys = %i[name self_introduction icon]
+    keys = %i[user_name self_introduction icon]
     devise_parameter_sanitizer.permit(:sign_up, keys:)
     devise_parameter_sanitizer.permit(:account_update, keys:)
   end

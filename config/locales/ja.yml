@@ -7,7 +7,7 @@ ja:
     attributes:
       user:
         email: メールアドレス
-        name: ユーザー名
+        user_name: ユーザー名
         self_introduction: 自己紹介
         password: パスワード
         icon: ユーザー画像
