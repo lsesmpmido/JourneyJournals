@@ -24,7 +24,10 @@ class JournalsController < ApplicationController
   def edit; end
 
   def create
-    @journal = Journal.new(journal_params)
+    @journal = current_user.journals.new(journal_params)
+    @journal.images.each do |image|
+      image.user_id = current_user.id
+    end
     if @journal.save
       process_images(@journal.images)
       redirect_to @journal, notice: 'Journal and Image were successfully created.'

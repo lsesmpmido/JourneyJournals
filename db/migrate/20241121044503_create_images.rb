@@ -7,6 +7,7 @@ class CreateImages < ActiveRecord::Migration[7.2]
       t.float :longitude
       t.datetime :date_of_shooting
       t.references :journal, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end

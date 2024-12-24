@@ -20,14 +20,17 @@ class ImagesController < ApplicationController
   def edit; end
 
   def create
-    @image = Image.new(image_params)
+    @image = current_user.images.new(image_params)
+    @image.user_id = current_user.id
     @image.image_name = @image.image_name.presence || @image.file.filename.to_s
 
     if @image.save
       exif = extract_exif_from_image(@image)
       if exif
-        @image.latitude = convert_to_decimal(exif.gpslatitude)
-        @image.longitude = convert_to_decimal(exif.gpslongitude)
+        if exif.gpslatitude && exif.gpslongitude
+          @image.latitude = convert_to_decimal(exif.gpslatitude)
+          @image.longitude = convert_to_decimal(exif.gpslongitude)
+        end
         @image.date_of_shooting = exif.date_time_original || exif.create_date
         @image.save
       end
