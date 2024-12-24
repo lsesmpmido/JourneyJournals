@@ -1,9 +1,16 @@
 en:
   activerecord:
     models:
+      user: User
       journal: Journal
       image: Image
     attributes:
+      user:
+        email: Email
+        name: User name
+        self_introduction: Self introduction
+        password: Password
+        icon: User icon
       journal:
         journal_name: Journal name
         description: Description
@@ -19,6 +26,8 @@ en:
       location_of_shooting: Location of shooting
     journal:
       activity_record: Activity record
+    layout:
+      sign_in_as: "Sign in as %{user}"
     common:
       show: "Show this %{name}"
       edit: "Edit this %{name}"
@@ -33,6 +42,7 @@ en:
       title_show: "%{name}"
       error: error
       validation_error: "%{errors} prohibited this %{name} from being saved"
+      sign_out: Sign out
     pagination:
       first: "« First"
       last: "Last »"
@@ -44,3 +54,7 @@ en:
       notice_create: "%{name} was successfully created."
       notice_update: "%{name} was successfully updated."
       notice_destroy: "%{name} was successfully destroyed."
+  devise:
+    registrations:
+      edit:
+        title: Edit account

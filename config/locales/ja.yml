@@ -1,9 +1,16 @@
 ja:
   activerecord:
     models:
+      user: ユーザー
       journal: ジャーナル
       image: 写真
     attributes:
+      user:
+        email: メールアドレス
+        name: ユーザー名
+        self_introduction: 自己紹介
+        password: パスワード
+        icon: ユーザー画像
       journal:
         journal_name: ジャーナルの名前
         description: 説明文
@@ -19,6 +26,8 @@ ja:
       location_of_shooting: 撮影場所
     journal:
       activity_record: 行動記録
+    layout:
+      sign_in_as: "%{user} としてログイン中"
     common:
       show: "この%{name}を表示"
       edit: "この%{name}を編集"
@@ -33,6 +42,7 @@ ja:
       title_show: "%{name}の詳細"
       error: エラー
       validation_error: "%{errors}があるため、この%{name}は保存できませんでした"
+      sign_out: ログアウト
     pagination:
       first: "« 最初"
       last: "最後 »"
@@ -44,3 +54,7 @@ ja:
       notice_create: "%{name}が作成されました。"
       notice_update: "%{name}が更新されました。"
       notice_destroy: "%{name}が削除されました。"
+  devise:
+    registrations:
+      edit:
+        title: アカウント編集
