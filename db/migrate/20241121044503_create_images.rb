@@ -1,7 +1,7 @@
 class CreateImages < ActiveRecord::Migration[7.2]
   def change
     create_table :images do |t|
-      t.string :image_name
+      t.string :image_name, null: false
       t.text :memo
       t.float :latitude
       t.float :longitude
@@ -11,5 +11,7 @@ class CreateImages < ActiveRecord::Migration[7.2]
 
       t.timestamps
     end
+
+    add_index :images, :image_name, unique: false
   end
 end

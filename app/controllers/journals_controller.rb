@@ -25,14 +25,12 @@ class JournalsController < ApplicationController
 
   def create
     @journal = current_user.journals.new(journal_params)
-    @journal.images.each do |image|
-      image.user_id = current_user.id
-    end
+    preprocess_images(@journal.images) if @journal.images.any?
     if @journal.save
-      process_images(@journal.images)
+      postprocess_images(@journal.images) if @journal.images.any?
       redirect_to @journal, notice: 'Journal and Image were successfully created.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -59,12 +57,18 @@ class JournalsController < ApplicationController
     params.require(:journal).permit(:journal_name, :description, images_attributes: [:file])
   end
 
-  def process_images(images)
+  def preprocess_images(images)
+    images.each do |image|
+      image.image_name ||= image.file.filename.to_s
+      image.user_id = current_user.id
+    end
+  end
+
+  def postprocess_images(images)
     images.each do |image|
       exif = extract_exif_from_image(image)
-      next unless exif
-
-      update_image_with_exif(image, exif)
+      update_image_with_exif(image, exif) if exif
+      image.save
     end
   end
 

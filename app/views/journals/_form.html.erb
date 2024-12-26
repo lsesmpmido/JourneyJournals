@@ -1,0 +1,27 @@
+<%= form_with(model: @journal, local: true) do |form| %>
+  <%= render 'shared/validation_errors', resource: @journal %>
+
+  <div>
+    <%= form.label :journal_name %>
+    <%= form.text_field :journal_name %>
+  </div>
+
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <% if @journal.new_record? %>
+    <h3><%= i18n_pluralize(Image.model_name.human) %></h3>
+    <%= form.fields_for :images do |image_form| %>
+      <div>
+        <%= image_form.label :file %>
+        <%= image_form.file_field :file %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

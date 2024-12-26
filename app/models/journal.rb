@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Journal < ApplicationRecord
+  validates :journal_name, presence: true
+
   belongs_to :user
   has_many :images, dependent: :destroy
 

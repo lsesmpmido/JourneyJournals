@@ -1,32 +1,6 @@
 <h1><%= t('views.common.title_edit', name: Journal.model_name.human.downcase) %></h1>
 
-<%= form_with(model: @journal, local: true) do |form| %>
-  <% if @journal.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@journal.errors.count, "error") %> prohibited this journal from being saved:</h2>
-
-      <ul>
-        <% @journal.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :journal_name %>
-    <%= form.text_field :journal_name %>
-  </div>
-
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+<%= render 'form', journal: @journal %>
 
 <nav class="page-nav">
   <%= link_to t('views.common.back_show', name: Journal.model_name.human.downcase), @journal %> |

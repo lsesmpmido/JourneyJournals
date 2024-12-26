@@ -1,23 +1,7 @@
 <h1><%= t('views.common.title_new', name: Image.model_name.human.downcase) %></h1>
 
-<%= form_with model: @image, local: true do |form| %>
-  <div>
-    <%= form.label :file %>
-    <%= form.file_field :file %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :image_name, style: "display: block" %>
-    <%= form.text_field :image_name, class: "form-control" %>
-  </div>
-
-  <%= form.hidden_field :journal_id, value: params[:journal_id] %>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+<%= render 'form', journal: @journal %>
 
 <nav class="page-nav">
-  <%= link_to t('views.common.back_show', name: i18n_pluralize(Journal.model_name.human.downcase)), journal_path(params[:journal_id]) %>
+  <%= link_to t('views.common.back_show', name: i18n_pluralize(Journal.model_name.human.downcase)), journal_path(@journal.id) %>
 </nav>

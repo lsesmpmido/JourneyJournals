@@ -24,3 +24,11 @@
   height: 40px;
   border-radius: 50%;
 }
+
+.alert-success {
+  color: green;
+}
+
+.alert-danger {
+  color: red;
+}

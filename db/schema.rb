@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_23_012252) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.string "image_name"
+    t.string "image_name", null: false
     t.text "memo"
     t.float "latitude"
     t.float "longitude"
@@ -49,16 +49,18 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_23_012252) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["image_name"], name: "index_images_on_image_name"
     t.index ["journal_id"], name: "index_images_on_journal_id"
     t.index ["user_id"], name: "index_images_on_user_id"
   end
 
   create_table "journals", force: :cascade do |t|
-    t.string "journal_name"
+    t.string "journal_name", null: false
     t.text "description"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["journal_name"], name: "index_journals_on_journal_name"
     t.index ["user_id"], name: "index_journals_on_user_id"
   end
 
@@ -68,12 +70,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_23_012252) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "user_name", default: "", null: false
+    t.string "user_name", null: false
     t.text "self_introduction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["user_name"], name: "index_users_on_user_name", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
