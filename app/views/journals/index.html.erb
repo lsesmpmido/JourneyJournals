@@ -1,12 +1,16 @@
-<h1><%= t('views.common.title_index', name: i18n_pluralize(Journal.model_name.human)) %></h1>
-<%= link_to t('views.common.new', name: Journal.model_name.human.downcase), new_journal_path %>
-
-<ul>
-  <% @journals.each do |journal| %>
-    <%= Journal.human_attribute_name(:journal_name) %>: <%= journal.journal_name %><br>
-    <%= Journal.human_attribute_name(:description) %>: <%= journal.description %><br>
-    <%= link_to t('views.common.show', name: Journal.model_name.human.downcase), journal %> |
-    <%= link_to t('views.common.edit', name: Journal.model_name.human.downcase), edit_journal_path(journal) %>
-    <%= button_to t('views.common.destroy', name: Journal.model_name.human.downcase), journal, method: :delete, data: { confirm: 'Are you sure?' } %><br>
-  <% end %>
-</ul>
+<div class="container">
+  <div class="main-content">
+    <h1><%= t('views.common.title_index', name: i18n_pluralize(Journal.model_name.human)) %></h1>
+    <div id="index" class="list">
+      <% @journals.each do |journal| %>
+        <%= link_to journal_path(journal) do %>
+          <div class="frame">
+            <p><strong><%= journal.journal_name %></strong></p>
+            <p><%= journal.description %></p>
+            <p><%= journal.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

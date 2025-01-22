@@ -1,44 +1,42 @@
-<h1><%= t('views.common.title_show', name: Image.model_name.human) %></h1>
+<div class="container">
+  <div class="main-content">
+    <h1><%= t('views.common.title_show', name: Image.model_name.human) %></h1>
+    <div class="btn">
+      <%= link_to t('views.common.edit', name: i18n_pluralize(Image.model_name.human.downcase)), edit_image_path(@image) %>
+    </div>
 
-<p>
-  <strong><%= Image.human_attribute_name(:image_name) %>:</strong>
-  <%= @image.image_name %>
-</p>
+    <h2><%= @image.image_name %></h2>
+    <div class="frame">
+      <%= @image.memo %>
+    </div>
 
-<p>
-  <strong><%= Image.human_attribute_name(:memo) %>:</strong>
-  <%= @image.memo %>
-</p>
+    <h2><%= Image.human_attribute_name(:date_of_shooting) %></h2>
+    <div class="frame">
+      <% if @image.date_of_shooting %>
+        <%= @image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %>
+      <% end %>
+    </div>
 
-<p>
-  <strong><%= Image.human_attribute_name(:date_of_shooting) %>:</strong>
-  <% if @image.date_of_shooting %>
-    <%= @image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %>
-  <% end %>
-</p>
+    <% if @image.latitude && @image.longitude %>
+      <h2><%= t('views.image.location_of_shooting') %></h2>
+      <div class="frame">
+        <div id="map" style="width: 400px; height: 400px;"></div>
+        <input type="hidden" id="latitude" value="<%= @image.latitude %>">
+        <input type="hidden" id="longitude" value="<%= @image.longitude %>">
+      </div>
+    <% end %>
 
-<% if @image.file.attached? %>
-  <p>
-    <%= image_tag @image.file, class: "fixed-height-image" %>
-  </p>
-<% end %>
+    <% content_for :scripts do %>
+      <%= javascript_include_tag "images/show_shooting_map" %>
+    <% end %>
+  </div>
 
-<% if @image.latitude && @image.longitude %>
-  <p>
-    <strong><%= t('views.image.location_of_shooting') %>:</strong>
-  </p>
-  <div id="map" style="width: 400px; height: 400px;"></div>
-  <input type="hidden" id="latitude" value="<%= @image.latitude %>">
-  <input type="hidden" id="longitude" value="<%= @image.longitude %>">
-<% end %>
-
-<% content_for :scripts do %>
-  <%= javascript_include_tag "images/show_shooting_map" %>
-<% end %>
-
-<nav class="page-nav">
-  <%= link_to t('views.common.show', name: Journal.model_name.human.downcase), journal_path(@image.journal) %> |
-  <%= link_to t('views.common.back_index', name: Image.model_name.human.downcase), images_path %> |
-  <%= link_to t('views.common.edit', name: i18n_pluralize(Image.model_name.human.downcase)), edit_image_path(@image) %>
-  <%= button_to t('views.common.destroy', name: Image.model_name.human.downcase), image_path(@image), method: :delete, data: { turbo: false, confirm: "Are you sure?" } %>
-</nav>
+  <div class="side-content">
+    <h2><%= Image.model_name.human %></h2>
+    <% if @image.file.attached? %>
+      <p>
+        <%= image_tag @image.file, class: "fixed-width-image" %>
+      </p>
+    <% end %>
+  </div>
+</div>

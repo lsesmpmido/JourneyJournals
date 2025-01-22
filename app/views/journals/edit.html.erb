@@ -1,8 +1,10 @@
-<h1><%= t('views.common.title_edit', name: Journal.model_name.human.downcase) %></h1>
+<div class="container">
+  <div class="main-content">
+    <h1><%= t('views.common.title_edit', name: Journal.model_name.human.downcase) %></h1>
+    <div class="btn">
+      <%= button_to t('views.common.destroy', name: Journal.model_name.human.downcase), journal_path(@journal), method: :delete, data: { turbo: false, confirm: "Are you sure?" } %>
+    </div>
 
-<%= render 'form', journal: @journal %>
-
-<nav class="page-nav">
-  <%= link_to t('views.common.back_show', name: Journal.model_name.human.downcase), @journal %> |
-  <%= link_to t('views.common.back_index', name: i18n_pluralize(Journal.model_name.human.downcase)), journals_path %>
-</nav>
+    <%= render 'form', journal: @journal %>
+  </div>
+</div>

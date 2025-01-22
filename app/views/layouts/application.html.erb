@@ -19,23 +19,37 @@
   </head>
 
   <body>
-    <nav class="header-nav">
-      <% if user_signed_in? %>
-        <%= link_to i18n_pluralize(Journal.model_name.human), journals_path %> |
-        <%= link_to i18n_pluralize(Image.model_name.human), images_path %> |
-        <%= link_to t('devise.registrations.edit.title'), edit_user_registration_path, class: "navbar-link" %> |
-        <%= link_to t('views.common.sign_out'), destroy_user_session_path, data: { turbo_method: :delete }, class: "navbar-link" %>
-        <%= t('views.layout.sign_in_as', user: current_user.email) %>
-        <%= image_tag(url_for(current_user.icon), alt: 'Icon', class: 'icon-img') if current_user.icon.attached? %>
+    <% if user_signed_in? %>
+      <nav id="account-menu" class="header menu">
+        <ul>
+          <li><%= t('views.layout.sign_in_as', user: current_user.email) %></li>
+          <li><%= image_tag(url_for(current_user.icon), alt: 'Icon', class: 'icon-img') if current_user.icon.attached? %></li>
+          <li><%= link_to t('devise.registrations.edit.title'), edit_user_registration_path, class: "navbar-link" %></li>
+          <li><%= link_to t('views.common.sign_out'), destroy_user_session_path, data: { turbo_method: :delete }, class: "navbar-link" %></li>
+        <ul>
+      </nav>
+
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
       <% end %>
-    </nav>
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+
+      <div id="new-journal-path">
+        <div class="btn">
+          <%= link_to t('views.common.new', name: Journal.model_name.human.downcase), new_journal_path %>
+        </div>
+      </div>
+
+      <nav id="main-menu" class="menu">
+        <ul>
+          <li><%= link_to i18n_pluralize(Journal.model_name.human), journals_path, class: ("active" if request.path == "/" or request.path.start_with?("/journals")) %></li>
+          <li><%= link_to i18n_pluralize(Image.model_name.human), images_path, class: ("active" if request.path.start_with?("/images")) %></li>
+        <ul>
+      </nav>
     <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
-    <%= yield :scripts %>
-    <%= yield %>
+      <%= yield :scripts %>
+      <%= yield %>
   </body>
 </html>

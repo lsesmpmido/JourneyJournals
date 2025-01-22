@@ -1,11 +1,14 @@
-<h1><%= t('views.common.title_edit', name: Image.model_name.human.downcase) %></h1>
+<div class="container">
+  <div class="main-content">
+    <h1><%= t('views.common.title_edit', name: Image.model_name.human.downcase) %></h1>
+    <div class="btn">
+      <%= button_to t('views.common.destroy', name: Image.model_name.human.downcase), image_path(@image), method: :delete, data: { turbo: false, confirm: "Are you sure?" } %>
+    </div>
 
-<%= render 'form', image: @image %>
+    <%= render 'form', image: @image %>
 
-<% content_for :scripts do %>
-  <%= javascript_include_tag "images/edit_shooting_map" %>
-<% end %>
-
-<nav class="page-nav">
-  <%= link_to t('views.common.back_show', name: Image.model_name.human.downcase), @image %>
-</nav>
+    <% content_for :scripts do %>
+      <%= javascript_include_tag "images/edit_shooting_map" %>
+    <% end %>
+  </div>
+</div>

@@ -2,7 +2,7 @@ ja:
   activerecord:
     models:
       user: ユーザー
-      journal: ジャーナル
+      journal: 旅行記
       image: 写真
     attributes:
       user:
@@ -32,7 +32,7 @@ ja:
       show: "この%{name}を表示"
       edit: "この%{name}を編集"
       destroy: "この%{name}を削除"
-      new: "%{name}の追加"
+      new: "%{name}を作成"
       back_index: "%{name}の一覧に戻る"
       back_show: "%{name}の詳細に戻る"
       delete_confirm: よろしいですか？

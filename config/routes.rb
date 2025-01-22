@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   root "journals#index"
 
   resources :images
-  resources :journals
 
   resources :journals do
     resources :images, only: [:index, :new, :create, :show, :destroy]

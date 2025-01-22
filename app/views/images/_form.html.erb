@@ -1,17 +1,17 @@
-<%= form_with model: @image, local: true do |form| %>
-  <div>
-    <%= form.label :image_name, style: "display: block" %>
+<%= form_with(model: @image, local: true) do |form| %>
+  <h2><%= form.label :image_name, style: "display: block" %></h2>
+  <div class="frame">
     <%= form.text_field :image_name, class: "form-control" %>
   </div>
 
   <% if action_name == 'edit' %>
-    <div>
-      <%= form.label :memo, style: "display: block" %>
+    <h2><%= form.label :memo, style: "display: block" %></h2>
+    <div class="frame">
       <%= form.text_area :memo, class: "form-control" %>
     </div>
 
-    <div>
-      <%= form.label :date_of_shooting, style: "display: block" %>
+    <h2><%= form.label :date_of_shooting, style: "display: block" %></h2>
+    <div class="frame">
       <% if @image.date_of_shooting %>
         <%= form.datetime_local_field :date_of_shooting, class: "form-control", value: @image.date_of_shooting.in_time_zone("Asia/Tokyo").strftime('%Y-%m-%dT%H:%M') %>
       <% else %>
@@ -19,16 +19,17 @@
       <% end %>
     </div>
 
-    <div>
+    <h2>
       <%= form.label t('views.image.location_of_shooting'), style: "display: block" %>
       <%= form.text_field :latitude, id: "latitude", class: "form-control", style: "display: none;" %>
       <%= form.text_field :longitude, id: "longitude", class: "form-control", style: "display: none;" %>
-    </div>
+    </h2>
     <div id="map" style="width: 400px; height: 400px;"></div>
   <% end %>
 
   <% if action_name == 'new' %>
-    <div>
+    <h2><%= i18n_pluralize(Image.model_name.human) %></h2>
+    <div class="frame">
       <%= form.label :file %>
       <%= form.file_field :file %>
     </div>
