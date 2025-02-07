@@ -41,6 +41,7 @@ ja:
       title_new: "%{name}の新規作成"
       title_edit: "%{name}の編集"
       title_show: "%{name}の詳細"
+      no_data: "%{name}がありません"
       error: エラー
       validation_error: "%{errors}があるため、この%{name}は保存できませんでした"
       sign_out: ログアウト

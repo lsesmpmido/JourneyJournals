@@ -11,6 +11,9 @@ class JournalsController < ApplicationController
 
   def show
     @images = @journal.images.includes(:journal).order(:date_of_shooting)
+    @grouped_images = @images.group_by do |image|
+      image.date_of_shooting&.in_time_zone('Asia/Tokyo')&.strftime('%Y年%m月%d日')
+    end
     @locations = @images.map do |image|
       { lat: image.latitude, lng: image.longitude } if image.latitude && image.longitude
     end.compact
@@ -30,7 +33,7 @@ class JournalsController < ApplicationController
     preprocess_images(@journal.images) if @journal.images.any?
     if @journal.save
       postprocess_images(@journal.images) if @journal.images.any?
-      redirect_to @journal, notice: 'Journal and Image were successfully created.'
+      redirect_to @journal, notice: t('controllers.common.notice_create', name: Journal.model_name.human)
     else
       render :new, status: :unprocessable_entity
     end
@@ -38,7 +41,7 @@ class JournalsController < ApplicationController
 
   def update
     if @journal.update(journal_params)
-      redirect_to @journal, notice: 'Journal was successfully updated.'
+      redirect_to @journal, notice: t('controllers.common.notice_update', name: Journal.model_name.human)
     else
       render :edit
     end
@@ -46,7 +49,7 @@ class JournalsController < ApplicationController
 
   def destroy
     @journal.destroy
-    redirect_to journals_url, notice: 'Journal was successfully destroyed.'
+    redirect_to journals_url, notice: t('controllers.common.notice_destroy', name: Journal.model_name.human)
   end
 
   private

@@ -1,9 +1,7 @@
 <div class="container">
   <div class="main-content">
     <h1><%= t('views.common.title_edit', name: Image.model_name.human.downcase) %></h1>
-    <div class="btn">
-      <%= button_to t('views.common.destroy', name: Image.model_name.human.downcase), image_path(@image), method: :delete, data: { turbo: false, confirm: "Are you sure?" } %>
-    </div>
+    <%= button_to t('views.common.destroy', name: Image.model_name.human.downcase), image_path(@image), method: :delete, method: :delete, form: { data: { turbo_confirm: t('views.common.delete_confirm') } }, class: "btn" %>
 
     <%= render 'form', image: @image %>
 

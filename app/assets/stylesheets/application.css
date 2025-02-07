@@ -1,18 +1,40 @@
 :root {
   --primary: #c04f15;
   --secondary: #f2aa84;
+  --primary-inverse: #6e6e6e;
   --text-default: white;
   --text-inverse: black;
-  --background-primary: #e97132; /*テンプレートのメインまたはアクセントとなる色*/
+  --background-primary: #e97132;
   --background-base: #d2c7ae;
-  --background-primary-inverse: #404040; /*background-primaryの対として使う色*/
+  --background-primary-inverse: #404040;
   --background-secondary: #f2f2f2;
-  --global-space: 5vw; /*サイト内の余白の一括管理用。画面幅100%＝100vwです。*/
+  --global-space: 5vw;
 }
 
 body {
   margin: 0px;
   background-color: var(--background-base);
+}
+
+input {
+  padding: 8px;
+  margin: 2px;
+  background-color: var(--background-secondary);
+  filter: brightness(0.9);
+  border: none;
+  border-radius: 2px;
+}
+
+textarea {
+  padding: 8px;
+  background-color: var(--background-secondary);
+  filter: brightness(0.9);
+  border: none;
+  border-radius: 2px;
+}
+
+ul {
+  padding: 0px;
 }
 
 h2 {
@@ -25,7 +47,6 @@ a {
   font-weight: bold;
 }
 
-/*メニュー１個あたりの設定*/
 nav a {
   display: block;
 }
@@ -36,24 +57,25 @@ textarea {
 }
 
 .header {
-  background-color: var(--background-primary-inverse); /* 灰色の背景色 */
+  background-color: var(--background-primary-inverse);
   padding: 10px;
   display: flex;
-  justify-content: flex-end; /* メニューアイテムを右寄せ */
-  align-items: center; /* アイテムを縦方向に中央寄せ */
-  border-bottom: 2px solid #ccc; /* メニュー下に薄い線を追加 */
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom: 2px solid #ccc;
 }
 
 .menu ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex; /*横並びにする*/
+  display: flex;
   justify-content: start;
   align-items: center;
 }
 
 .btn {
+  font-size: 16px;
   display: inline-block;
   padding: 10px 20px;
   background-color: var(--primary);
@@ -72,6 +94,12 @@ textarea {
 
 .btn:hover {
   filter: brightness(1.2);
+}
+
+.sub-btn {
+  background-color: var(--primary-inverse);
+  padding: 5px 10px;
+  font-size: 13px;
 }
 
 #new-journal-path {
@@ -100,8 +128,8 @@ textarea {
 }
 
 #main-menu li {
-  position: relative; /*ドロップダウンの幅となる基準を作っておく*/
-  text-align: center; /*テキストをセンタリング*/
+  position: relative;
+  text-align: center;
 }
 
 #main-menu li a {
@@ -125,11 +153,11 @@ textarea {
 }
 
 #thumbnails {
-  display: flex; /* 横並びにする */
-  flex-wrap: wrap; /* サムネイルが見切れそうなら折り返す */
-  gap: 20px; /* サムネイル間の間隔 */
-  justify-content: start; /* 左寄せにする */
-  align-items: center; /* 上揃えにする */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: start;
+  align-items: center;
 }
 
 .content {
@@ -161,10 +189,9 @@ textarea {
   color: red;
 }
 
-/* 全体のレイアウト */
 .container {
-  display: flex; /* Flexboxを使って並べる */
-  justify-content: space-between; /* 左右にスペースを確保 */
+  display: flex;
+  justify-content: space-between;
   min-height: 100vh;
 }
 
@@ -182,34 +209,33 @@ textarea {
 
 .devise {
   display: flex;
-  justify-content: center; /* 水平方向に中央寄せ */
-  align-items: center; /* 垂直方向に中央寄せ */
-  height: 100vh; /* 画面全体の高さにする */
+  justify-content: center;
+  align-items: center;
 }
 
-/* 左側のコンテンツ（元のコード） */
 .main-content {
   background-color: var(--background-primary);
   padding: 30px;
-  flex: 1; /* 左側コンテンツを広げる */
+  flex: 1;
 }
 
-/* 右側のコンテンツ */
 .side-content {
   background-color: var(--background-primary-inverse);
-  min-width: 400px; /* 右側コンテンツの幅を30%に設定（調整可能） */
-  padding: 0px 20px; /* 左側と少し間隔を空ける */
+  min-width: 400px;
+  padding: 0px 20px;
 }
 
 .center-content {
-  background-color: var(--background-primary-inverse);
+  background-color: var(--background-primary);
   width: 600px;
   padding: 20px 20px;
+  margin: 10px;
+  border-radius: 5px;
 }
 
 @media (max-width: 1000px) {
   .container {
-    flex-direction: column; /* 縦並びに変更 */
+    flex-direction: column;
   }
 }
 
@@ -243,4 +269,8 @@ textarea {
 .sub-frame {
   filter: brightness(0.9);
   margin-bottom: 10px;
+}
+
+.actions {
+  padding: 10px 0px;
 }

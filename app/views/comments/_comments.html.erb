@@ -7,13 +7,13 @@
             <%= comment.content %><br>
 
             <% if current_user == comment.user %>
-              <%= button_to t('views.common.destroy', name: Comment.model_name.human), polymorphic_path([commentable, comment]), method: :delete, form: { data: { turbo_confirm: t('views.common.delete_confirm') } } %>
+              <%= button_to t('views.common.destroy', name: Comment.model_name.human), polymorphic_path([commentable, comment]), method: :delete, form: { data: { turbo_confirm: t('views.common.delete_confirm') } }, class: "btn sub-btn" %>
             <% end %>
           </li>
         <% end %>
       <% end %>
     </ul>
   <% else %>
-    (<%= t('views.common.no_comments') %>)
+    (<%= t('views.common.no_data', name: i18n_pluralize(Comment.model_name.human)) %>)
   <% end %>
 </div>

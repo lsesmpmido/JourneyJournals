@@ -7,24 +7,31 @@
 
     <h2><%= @journal.journal_name %></h2>
     <div class="frame">
-      <%= @journal.description.presence || "説明文なし" %>
+      <%= @journal.description.presence || t('views.common.no_data', name: Journal.human_attribute_name(:description)) %>
     </div>
 
     <h2><%= t('views.journal.activity_record') %></h2>
     <div class="frame">
-      <ul class="activity_record">
-        <% @images.each do |image| %><li>
-          <%= link_to image_path(image) do %><%= image.image_name %><% end %><br>
-          <% if image.date_of_shooting %>
-            <strong><%= t(Image.human_attribute_name(:date_of_shooting)) %>:</strong>
-            <%= image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %>
+      <% @grouped_images.each do |date, images| %>
+        <% if images.present? %>
+          <h3><%= date %></h3>
+        <% end %>
+        <ul class="activity_record">
+          <% images.each do |image| %>
+            <li class="frame sub-frame">
+              <%= link_to image_path(image) do %><%= image.image_name %><% end %><br>
+              <% if image.date_of_shooting %>
+                <strong><%= t(Image.human_attribute_name(:date_of_shooting)) %>:</strong>
+                <%= image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%H時%M分") %>
+              <% end %>
+              <% if image.latitude && image.longitude %>
+                <strong><%= t('views.image.location_of_shooting') %>:</strong>
+                <%= "(#{image.latitude}, #{image.longitude})" %>
+              <% end %>
+            </li>
           <% end %>
-          <% if image.latitude && image.longitude %>
-            <strong><%= t('views.image.location_of_shooting') %>:</strong>
-            <%= "(#{image.latitude}, #{image.longitude})" %>
-          <% end %>
-        </li><% end %>
-      </ul>
+        </ul>
+      <% end %>
 
       <div class="map">
         <% if @locations %>

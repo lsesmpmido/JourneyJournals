@@ -37,7 +37,7 @@ class ImagesController < ApplicationController
         @image.date_of_shooting = exif.date_time_original || exif.create_date
         @image.save
       end
-      redirect_to journal_path(@image.journal_id), notice: 'Image was successfully added.'
+      redirect_to journal_path(@image.journal_id), notice: t('controllers.common.notice_create', name: Image.model_name.human)
     else
       render :new, status: :unprocessable_entity
     end

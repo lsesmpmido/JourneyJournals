@@ -7,13 +7,15 @@
 
     <h2><%= @image.image_name %></h2>
     <div class="frame">
-      <%= @image.memo %>
+      <%= @image.memo.presence || t('views.common.no_data', name: Image.human_attribute_name(:memo)) %>
     </div>
 
     <h2><%= Image.human_attribute_name(:date_of_shooting) %></h2>
     <div class="frame">
       <% if @image.date_of_shooting %>
         <%= @image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %>
+      <% else %>
+        <%= t('views.common.no_data', name: Image.human_attribute_name(:date_of_shooting)) %>
       <% end %>
     </div>
 
