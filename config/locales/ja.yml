@@ -4,6 +4,7 @@ ja:
       user: ユーザー
       journal: 旅行記
       image: 写真
+      comment: コメント
     attributes:
       user:
         email: メールアドレス

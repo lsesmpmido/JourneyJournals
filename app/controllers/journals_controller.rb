@@ -14,6 +14,8 @@ class JournalsController < ApplicationController
     @locations = @images.map do |image|
       { lat: image.latitude, lng: image.longitude } if image.latitude && image.longitude
     end.compact
+    @comment = Comment.new
+    @comments = @journal.comments
   end
 
   def new

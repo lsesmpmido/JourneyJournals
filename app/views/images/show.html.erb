@@ -29,6 +29,15 @@
     <% content_for :scripts do %>
       <%= javascript_include_tag "images/show_shooting_map" %>
     <% end %>
+
+    <h2><%= Comment.model_name.human %></h2>
+    <div class="frame">
+      <%= render 'comments/form', commentable: @image, comment: @comment %>
+      <div>
+        <%= render 'comments/comments', commentable: @image, comments: @comments %>
+      </div>
+    </div>
+
   </div>
 
   <div class="side-content">

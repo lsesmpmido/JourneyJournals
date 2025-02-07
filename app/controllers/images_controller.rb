@@ -10,7 +10,10 @@ class ImagesController < ApplicationController
     @images = Image.all.includes(:journal)
   end
 
-  def show; end
+  def show
+    @comment = Comment.new
+    @comments = @image.comments
+  end
 
   def new
     @journal = Journal.find(params[:journal_id])

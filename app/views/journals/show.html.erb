@@ -34,8 +34,16 @@
           <% end %>
         <% end %>
       </div>
-
     </div>
+
+    <h2><%= Comment.model_name.human %></h2>
+    <div class="frame">
+      <%= render 'comments/form', commentable: @journal, comment: @comment %>
+      <div>
+        <%= render 'comments/comments', commentable: @journal, comments: @comments %>
+      </div>
+    </div>
+
   </div>
 
   <div class="side-content">

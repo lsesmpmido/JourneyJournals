@@ -30,6 +30,11 @@ nav a {
   display: block;
 }
 
+textarea {
+  width: 100%;
+  min-height: 100px;
+}
+
 .header {
   background-color: var(--background-primary-inverse); /* 灰色の背景色 */
   padding: 10px;
@@ -56,12 +61,13 @@ nav a {
   text-align: left;
   border-radius: 5px;
   cursor: pointer;
+  border: none;
+  font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
 .btn a {
   color: var(--text-default);
-  font-weight: bold;
 }
 
 .btn:hover {
@@ -232,4 +238,9 @@ nav a {
 
 .frame p strong {
   font-weight: bold;
+}
+
+.sub-frame {
+  filter: brightness(0.9);
+  margin-bottom: 10px;
 }

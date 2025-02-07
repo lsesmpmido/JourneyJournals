@@ -11,6 +11,7 @@
     <%= form.text_area :description %>
   </div>
 
+  <div class "list">
   <% if @journal.new_record? %>
     <h2><%= i18n_pluralize(Image.model_name.human) %></h2>
     <div class="frame">
@@ -23,7 +24,5 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= form.submit class: "btn" %>
 <% end %>

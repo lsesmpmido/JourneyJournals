@@ -13,9 +13,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "journals#index"
 
-  resources :images
+  resources :images do
+    resources :comments, only: [:create, :destroy], module: :images
+  end
 
   resources :journals do
     resources :images, only: [:index, :new, :create, :show, :destroy]
+    resources :comments, only: [:create, :destroy], module: :journals
   end
 end
