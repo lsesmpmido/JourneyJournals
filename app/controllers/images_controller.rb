@@ -8,6 +8,7 @@ class ImagesController < ApplicationController
 
   def index
     @images = Image.all.includes(:journal)
+    @grouped_images = @images.group_by { |image| image.created_at.to_date }
   end
 
   def show

@@ -1,6 +1,5 @@
 <div class="container">
   <div class="main-content">
-    <h1><%= t('views.common.title_index', name: i18n_pluralize(Journal.model_name.human)) %></h1>
     <div id="index" class="list">
       <% @journals.each do |journal| %>
         <%= link_to journal_path(journal) do %>

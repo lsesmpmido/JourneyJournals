@@ -1,33 +1,38 @@
 <div class="container">
   <div class="main-content">
-    <h1><%= t('views.common.title_show', name: Image.model_name.human) %></h1>
-    <div class="btn">
-      <%= link_to t('views.common.edit', name: i18n_pluralize(Image.model_name.human.downcase)), edit_image_path(@image) %>
+    <div class="inner">
+      <div class="btn left">
+        <%= link_to t('views.common.edit', name: i18n_pluralize(Image.model_name.human.downcase)), edit_image_path(@image) %>
+      </div>
+      <div class="information right">
+        <% if @image.date_of_shooting %>
+          <strong><%= @image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></strong>
+        <% end %>
+      </div>
     </div>
 
     <h2><%= @image.image_name %></h2>
     <div class="frame">
-      <%= @image.memo.presence || t('views.common.no_data', name: Image.human_attribute_name(:memo)) %>
-    </div>
-
-    <h2><%= Image.human_attribute_name(:date_of_shooting) %></h2>
-    <div class="frame">
-      <% if @image.date_of_shooting %>
-        <%= @image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %>
-      <% else %>
-        <%= t('views.common.no_data', name: Image.human_attribute_name(:date_of_shooting)) %>
+      <% if @image.file.attached? %>
+        <p>
+          <%= image_tag @image.file, class: "fixed-width-image" %>
+        </p>
       <% end %>
     </div>
 
-    <% if @image.latitude && @image.longitude %>
-      <h2><%= t('views.image.location_of_shooting') %></h2>
-      <div class="frame">
-        <div id="map" style="width: 400px; height: 400px;"></div>
-        <input type="hidden" id="latitude" value="<%= @image.latitude %>">
-        <input type="hidden" id="longitude" value="<%= @image.longitude %>">
-      </div>
-    <% end %>
+    <h2><%= t(Image.human_attribute_name(:memo)) %></h2>
+    <div class="frame">
+      <%= @image.memo.presence || t('views.common.no_data', name: Image.human_attribute_name(:memo)) %>
+    </div>
+  </div>
 
+  <div class="side-content">
+    <h2><%= t('views.image.location_of_shooting') %></h2>
+    <% if @image.latitude && @image.longitude %>
+      <div id="map" style="width: 400px; height: 400px;"></div>
+      <input type="hidden" id="latitude" value="<%= @image.latitude %>">
+      <input type="hidden" id="longitude" value="<%= @image.longitude %>">
+    <% end %>
     <% content_for :scripts do %>
       <%= javascript_include_tag "images/show_shooting_map" %>
     <% end %>
@@ -39,15 +44,5 @@
         <%= render 'comments/comments', commentable: @image, comments: @comments %>
       </div>
     </div>
-
-  </div>
-
-  <div class="side-content">
-    <h2><%= Image.model_name.human %></h2>
-    <% if @image.file.attached? %>
-      <p>
-        <%= image_tag @image.file, class: "fixed-width-image" %>
-      </p>
-    <% end %>
   </div>
 </div>

@@ -1,12 +1,14 @@
 <div class="container">
   <div class="main-content">
-    <h1><%= t('views.common.title_index', name: i18n_pluralize(Image.model_name.human)) %></h1>
-    <div class="frame" id="thumbnails">
-      <% @images.each do |image| %>
-        <%= link_to image_path(image) do %>
-          <%= image_tag image.file, alt: image.image_name, class: "fixed-height-image", loading: "lazy" %>
+    <% @grouped_images.each do |date, images| %>
+      <h2><%= date.strftime("%Y年%m月%d日") %></h2>
+      <div class="frame" id="thumbnails">
+        <% images.each do |image| %>
+          <%= link_to image_path(image) do %>
+            <%= image_tag image.file, alt: image.image_name, class: "fixed-height-image", loading: "lazy" %>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>

@@ -1,72 +1,86 @@
 <div class="container">
   <div class="main-content">
-    <h1><%= t('views.common.title_show', name: Journal.model_name.human) %></h1>
-    <div class="btn">
-      <%= link_to t('views.common.edit', name: Journal.model_name.human.downcase), edit_journal_path(@journal) %>
+    <div class="inner">
+      <div class="btn left">
+        <%= link_to t('views.common.edit', name: Journal.model_name.human.downcase), edit_journal_path(@journal) %>
+      </div>
+      <div class="information right">
+        <strong><%= @journal.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></strong>
+      </div>
     </div>
 
     <h2><%= @journal.journal_name %></h2>
     <div class="frame">
       <%= @journal.description.presence || t('views.common.no_data', name: Journal.human_attribute_name(:description)) %>
+        <div class="map">
+    </div>
     </div>
 
     <h2><%= t('views.journal.activity_record') %></h2>
     <div class="frame">
+      <div class="btn">
+        <%= link_to t('views.common.new', name: Image.model_name.human.downcase), new_journal_image_path(@journal) %>
+      </div>
       <% @grouped_images.each do |date, images| %>
         <% if images.present? %>
           <h3><%= date %></h3>
         <% end %>
-        <ul class="activity_record">
+
+        <ul class="activity_record timeline">
+          <% previous_shooting_time = nil %>
           <% images.each do |image| %>
-            <li class="frame sub-frame">
-              <%= link_to image_path(image) do %><%= image.image_name %><% end %><br>
-              <% if image.date_of_shooting %>
-                <strong><%= t(Image.human_attribute_name(:date_of_shooting)) %>:</strong>
-                <%= image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%H時%M分") %>
+            <li>
+              <% if previous_shooting_time %>
+                <% travel_time = image.date_of_shooting - previous_shooting_time %>
+                <div class="travel_time">
+                  <%= t('views.journal.travel_time') %>: <%= travel_time.to_i / 60 %> 分
+                </div>
               <% end %>
-              <% if image.latitude && image.longitude %>
-                <strong><%= t('views.image.location_of_shooting') %>:</strong>
-                <%= "(#{image.latitude}, #{image.longitude})" %>
-              <% end %>
+
+              <p class="timeline-date">
+                <% if image.date_of_shooting %>
+                  <strong><%= image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%H時%M分") %></strong>
+                <% end %>
+              </p>
+
+              <div class="timeline-content">
+                <div class="frame sub-frame inner">
+                  <div class="left">
+                    <%= link_to image_path(image) do %><%= image.image_name %><% end %><br>
+                    <% if image.latitude && image.longitude %>
+                      <strong><%= t('views.image.location_of_shooting') %>:</strong>
+                      <%= "(#{image.latitude}, #{image.longitude})" %>
+                    <% end %>
+                  </div>
+                  <div class="right">
+                    <%= link_to image_path(image) do %>
+                      <%= image_tag image.file, alt: image.image_name, class: "fixed-height-image small-image", loading: "lazy" %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <% previous_shooting_time = image.date_of_shooting %>
             </li>
           <% end %>
         </ul>
       <% end %>
 
-      <div class="map">
-        <% if @locations %>
-          <div id="map" style="width: 400px; height: 400px;" data-locations="<%= @locations.to_json %>"></div>
-          <% content_for :scripts do %>
-            <%= javascript_include_tag "journals/show_route_map" %>
-          <% end %>
-        <% end %>
-      </div>
     </div>
+  </div>
+
+  <div class="side-content">
+    <h2><%= t('views.image.location_of_shooting') %></h2>
+    <% if @locations %>
+      <div id="map" style="width: 400px; height: 400px;" data-locations="<%= @locations.to_json %>"></div>
+      <% content_for :scripts do %>
+        <%= javascript_include_tag "journals/show_route_map" %>
+      <% end %>
+    <% end %>
 
     <h2><%= Comment.model_name.human %></h2>
     <div class="frame">
       <%= render 'comments/form', commentable: @journal, comment: @comment %>
-      <div>
-        <%= render 'comments/comments', commentable: @journal, comments: @comments %>
-      </div>
+      <%= render 'comments/comments', commentable: @journal, comments: @comments %>
     </div>
-
-  </div>
-
-  <div class="side-content">
-    <h2><%= Image.model_name.human %></h2>
-    <div id="new-image-path">
-      <div class="btn">
-        <%= link_to t('views.common.new', name: Image.model_name.human.downcase), new_journal_image_path(@journal) %>
-      </div>
-    </div>
-    <ul>
-      <% @images.each do |image| %>
-        <%= link_to image_path(image) do %>
-          <%= image_tag image.file, alt: image.image_name, class: "fixed-height-image", loading: "lazy" %>
-        <% end %>
-        <br>
-      <% end %>
-    </ul>
   </div>
 </div>

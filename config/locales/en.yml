@@ -26,6 +26,7 @@ en:
       location_of_shooting: Location of shooting
     journal:
       activity_record: Activity record
+      travel_time: Travel time
     layout:
       sign_in_as: "Sign in as %{user}"
     common:
@@ -40,6 +41,7 @@ en:
       title_new: "New %{name}"
       title_edit: "Editing %{name}"
       title_show: "%{name}"
+      no_data: "No %{name}"
       error: error
       validation_error: "%{errors} prohibited this %{name} from being saved"
       sign_out: Sign out

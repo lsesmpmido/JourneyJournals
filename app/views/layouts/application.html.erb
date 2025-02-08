@@ -20,9 +20,10 @@
 
   <body>
     <% if user_signed_in? %>
-      <nav id="account-menu" class="header menu">
-        <ul>
-          <li><%= t('views.layout.sign_in_as', user: current_user.email) %></li>
+      <nav id="account-menu" class="header menu inner">
+        <div class="left logo">Journey Journals</div>
+        <ul class="right">
+          <li class="sign_in_status"><%= t('views.layout.sign_in_as', user: current_user.email) %></li>
           <li><%= image_tag(url_for(current_user.icon), alt: 'Icon', class: 'icon-img') if current_user.icon.attached? %></li>
           <li><%= link_to t('devise.registrations.edit.title'), edit_user_registration_path, class: "navbar-link" %></li>
           <li><%= link_to t('views.common.sign_out'), destroy_user_session_path, data: { turbo_method: :delete }, class: "navbar-link" %></li>
@@ -36,9 +37,14 @@
         <p class="alert alert-danger"><%= alert %></p>
       <% end %>
 
-      <div id="new-journal-path">
-        <div class="btn">
-          <%= link_to t('views.common.new', name: Journal.model_name.human.downcase), new_journal_path %>
+      <div class="header-page inner">
+        <div class="left">
+          <% unless controller_name == 'sessions' || controller_name == 'registrations' %>
+            <h1><%= t("views.common.title_#{action_name}", name: i18n_pluralize(controller_name.classify.constantize.model_name.human)) %></h1>
+          <% end %>
+        </div>
+        <div class="right">
+          <%= link_to t('views.common.new', name: Journal.model_name.human.downcase), new_journal_path, class: "btn" %>
         </div>
       </div>
 

@@ -1,4 +1,6 @@
 <%= form_with(model: @image, local: true) do |form| %>
+  <%= form.submit class: "btn" %>
+
   <h2><%= form.label :image_name, style: "display: block" %></h2>
   <div class="frame">
     <%= form.text_field :image_name, class: "form-control" %>
@@ -24,7 +26,9 @@
       <%= form.text_field :latitude, id: "latitude", class: "form-control", style: "display: none;" %>
       <%= form.text_field :longitude, id: "longitude", class: "form-control", style: "display: none;" %>
     </h2>
-    <div id="map" style="width: 400px; height: 400px;"></div>
+    <div class="frame">
+      <div id="map" style="width: 400px; height: 400px;"></div>
+    </div>
   <% end %>
 
   <% if action_name == 'new' %>
@@ -35,8 +39,4 @@
     </div>
     <%= form.hidden_field :journal_id, value: params[:journal_id] %>
   <% end %>
-
-  <div class="actions">
-    <%= form.submit class: "btn" %>
-  </div>
 <% end %>

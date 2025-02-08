@@ -1,8 +1,9 @@
 <div class="container">
   <div class="main-content">
-    <h1><%= t('views.common.title_edit', name: Journal.model_name.human.downcase) %></h1>
-    <%= button_to t('views.common.destroy', name: Journal.model_name.human.downcase), journal_path(@journal), method: :delete, method: :delete, form: { data: { turbo_confirm: t('views.common.delete_confirm') } }, class: "btn" %>
-
     <%= render 'form', journal: @journal %>
+
+    <div class="actions">
+      <%= button_to t('views.common.destroy', name: Journal.model_name.human.downcase), journal_path(@journal), method: :delete, method: :delete, form: { data: { turbo_confirm: t('views.common.delete_confirm') } }, class: "btn" %>
+    </div>
   </div>
 </div>

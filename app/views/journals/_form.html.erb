@@ -1,6 +1,6 @@
 <%= form_with(model: @journal, local: true) do |form| %>
   <%= render 'shared/validation_errors', resource: @journal %>
-
+  <%= form.submit class: "btn" %>
   <h2><%= form.label :journal_name %></h2>
   <div class="frame">
     <%= form.text_field :journal_name %>
@@ -23,8 +23,5 @@
       <% end %>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= form.submit class: "btn" %>
   </div>
 <% end %>
