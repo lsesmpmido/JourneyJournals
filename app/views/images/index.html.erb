@@ -1,5 +1,10 @@
 <div class="container">
   <div class="main-content">
+    <% if @images.empty? %>
+      <div class="frame sub-frame">
+        <p><strong><%= t('views.common.no_data', name: Image.model_name.human ) %></strong><p>
+      </div>
+    <% end %>
     <% @grouped_images.each do |date, images| %>
       <h2><%= date.strftime("%Y年%m月%d日") %></h2>
       <div class="frame" id="thumbnails">

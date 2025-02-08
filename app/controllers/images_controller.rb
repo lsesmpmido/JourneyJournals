@@ -67,7 +67,7 @@ class ImagesController < ApplicationController
   end
 
   def image_params
-    params.require(:image).permit(:image_name, :memo, :file, :latitude, :longitude, :date_of_shooting, :journal_id)
+    params.require(:image).permit(:image_name, :memo, :file, :latitude, :longitude, :date_of_shooting, :memo_image, :journal_id)
   end
 
   def extract_exif_from_image(image)

@@ -15,7 +15,7 @@
     <div class="frame">
       <% if @image.file.attached? %>
         <p>
-          <%= image_tag @image.file, class: "fixed-width-image" %>
+          <%= image_tag @image.file, class: "fixed-height-image" %>
         </p>
       <% end %>
     </div>
@@ -23,12 +23,15 @@
     <h2><%= t(Image.human_attribute_name(:memo)) %></h2>
     <div class="frame">
       <%= @image.memo.presence || t('views.common.no_data', name: Image.human_attribute_name(:memo)) %>
+      <% if @image.memo_image.attached? %>
+        <%= image_tag @image.memo_image, class: "fixed-height-image" %>
+      <% end %>
     </div>
   </div>
 
   <div class="side-content">
-    <h2><%= t('views.image.location_of_shooting') %></h2>
     <% if @image.latitude && @image.longitude %>
+      <h2><%= t('views.image.location_of_shooting') %></h2>
       <div id="map" style="width: 400px; height: 400px;"></div>
       <input type="hidden" id="latitude" value="<%= @image.latitude %>">
       <input type="hidden" id="longitude" value="<%= @image.longitude %>">
