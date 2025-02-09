@@ -27,7 +27,7 @@ ja:
       location_of_shooting: 撮影場所
     journal:
       activity_record: 行動記録
-      travel_time: 移動時間
+      elapsed_time: 経過時間
     layout:
       sign_in_as: "%{user} としてログイン中"
     common:

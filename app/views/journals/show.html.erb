@@ -12,8 +12,7 @@
     <h2><%= @journal.journal_name %></h2>
     <div class="frame">
       <%= @journal.description.presence || t('views.common.no_data', name: Journal.human_attribute_name(:description)) %>
-        <div class="map">
-    </div>
+      <div class="map"></div>
     </div>
 
     <h2><%= t('views.journal.activity_record') %></h2>
@@ -31,9 +30,9 @@
           <% images.each do |image| %>
             <li>
               <% if previous_shooting_time %>
-                <% travel_time = image.date_of_shooting - previous_shooting_time %>
-                <div class="travel_time">
-                  <%= t('views.journal.travel_time') %>: <%= travel_time.to_i / 60 %> 分
+                <% elapsed_time = image.date_of_shooting - previous_shooting_time %>
+                <div class="elapsed-time">
+                  <%= t('views.journal.elapsed_time') %>: <%= elapsed_time.to_i / 60 %> 分
                 </div>
               <% end %>
 

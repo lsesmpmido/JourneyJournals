@@ -12,6 +12,8 @@
 body {
   margin: 0px;
   background-color: var(--body-color);
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 input {
@@ -243,7 +245,7 @@ textarea {
 .side-content {
   background-color: var(--main-color);
   min-width: 400px;
-  padding: 0px 20px;
+  padding: 0px 20px 20px 20px;
   position: sticky;
   top: 0px;
   max-height: 100vh;
@@ -289,13 +291,14 @@ textarea {
   padding: 10px 0px;
 }
 
-.travel_time {
+.elapsed-time {
   background-color: var(--main-color);
   color: var(--default-text-color);
   padding: 10px 15px;
   margin: 10px 0;
   border-radius: 5px;
   font-weight: bold;
+  text-align: center;
   width: 130px;
 }
 

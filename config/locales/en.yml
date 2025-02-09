@@ -26,7 +26,7 @@ en:
       location_of_shooting: Location of shooting
     journal:
       activity_record: Activity record
-      travel_time: Travel time
+      elapsed_time: Elapsed time
     layout:
       sign_in_as: "Sign in as %{user}"
     common:
