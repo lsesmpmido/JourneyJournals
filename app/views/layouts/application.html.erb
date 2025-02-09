@@ -10,9 +10,7 @@
     <%= yield :head %>
 
     <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="icon" href="<%= asset_path('favicon.ico') %>" type="image/x-icon">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&callback=initMap" async defer crossorigin="anonymous"></script>
@@ -20,35 +18,43 @@
 
   <body>
     <% if user_signed_in? %>
-      <nav id="account-menu" class="header menu inner">
-        <div class="left logo">Journey Journals</div>
+      <nav class="account-menu header menu inner">
+        <ul class="left">
+        <img src="<%= asset_path('logo_icon.png') %>" alt="Logo" class="logo-icon">
+          <li><strong class="logo-text collapse-on-small">Journey Journal</strong></li>
+        </ul>
         <ul class="right">
-          <li class="sign_in_status"><%= t('views.layout.sign_in_as', user: current_user.email) %></li>
+          <li class="collapse-on-small"><%= t('views.layout.sign_in_as', user: current_user.email) %></li>
           <li><%= image_tag(url_for(current_user.icon), alt: 'Icon', class: 'icon-img') if current_user.icon.attached? %></li>
           <li><%= link_to t('devise.registrations.edit.title'), edit_user_registration_path, class: "navbar-link" %></li>
           <li><%= link_to t('views.common.sign_out'), destroy_user_session_path, data: { turbo_method: :delete }, class: "navbar-link" %></li>
         <ul>
       </nav>
 
-      <% if notice %>
-        <p class="alert alert-success"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert alert-danger"><%= alert %></p>
-      <% end %>
-
       <div class="header-page inner">
-        <div class="left">
-          <% unless controller_name == 'sessions' || controller_name == 'registrations' %>
-            <h1><%= t("views.common.title_#{action_name}", name: i18n_pluralize(controller_name.classify.constantize.model_name.human)) %></h1>
+        <div class="left inner">
+          <% if controller_name == 'sessions' || controller_name == 'registrations' %>
+            <% if controller_name == 'registrations' || action_name == 'edit' %>
+              <h1 class="left"><%= t('devise.registrations.edit.title', resource: resource.model_name.human) %></h1>
+            <% end %>
+          <% else %>
+            <h1 class="left"><%= t("views.common.title_#{action_name}", name: i18n_pluralize(controller_name.classify.constantize.model_name.human)) %></h1>
           <% end %>
+            <div class="right">
+            <% if notice %>
+              <div class="alert alert-success"><%= notice %></div>
+            <% end %>
+            <% if alert %>
+              <div class="alert alert-danger"><%= alert %></div>
+            <% end %>
+          </div>
         </div>
         <div class="right">
           <%= link_to t('views.common.new', name: Journal.model_name.human.downcase), new_journal_path, class: "btn" %>
         </div>
       </div>
 
-      <nav id="main-menu" class="menu">
+      <nav class="main-menu menu">
         <ul>
           <li><%= link_to i18n_pluralize(Journal.model_name.human), journals_path, class: ("active" if request.path == "/" or request.path.start_with?("/journals")) %></li>
           <li><%= link_to i18n_pluralize(Image.model_name.human), images_path, class: ("active" if request.path.start_with?("/images")) %></li>

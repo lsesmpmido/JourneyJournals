@@ -44,20 +44,21 @@
               </p>
 
               <div class="timeline-content">
-                <div class="frame sub-frame inner">
-                  <div class="left">
-                    <%= link_to image_path(image) do %><%= image.image_name %><% end %><br>
-                    <% if image.latitude && image.longitude %>
-                      <strong><%= t('views.image.location_of_shooting') %>:</strong>
-                      <%= "(#{image.latitude}, #{image.longitude})" %>
-                    <% end %>
-                  </div>
-                  <div class="right">
-                    <%= link_to image_path(image) do %>
+
+                <%= link_to image_path(image) do %>
+                  <div class="frame sub-frame inner">
+                    <div class="left">
+                      <%= image.image_name %><br>
+                      <% if image.latitude && image.longitude %>
+                        <%= t('views.image.location_of_shooting') %>:<%= " (#{image.latitude}, #{image.longitude})" %>
+                      <% end %>
+                    </div>
+                    <div class="right">
                       <%= image_tag image.file, alt: image.image_name, class: "fixed-height-image small-image", loading: "lazy" %>
-                    <% end %>
+                    </div>
                   </div>
-                </div>
+                <% end %>
+
               </div>
               <% previous_shooting_time = image.date_of_shooting %>
             </li>

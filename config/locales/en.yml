@@ -38,6 +38,7 @@ en:
       back_show: "Back to %{name}"
       delete_confirm: "Are you sure?"
       title_index: "%{name}"
+      title_create: "New %{name}"
       title_new: "New %{name}"
       title_edit: "Editing %{name}"
       title_show: "%{name}"

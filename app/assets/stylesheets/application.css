@@ -1,25 +1,23 @@
 :root {
-  --primary: #c04f15;
-  --secondary: #f2aa84;
-  --primary-inverse: #6e6e6e;
-  --text-default: white;
-  --text-inverse: black;
-  --background-primary: #e97132;
-  --background-base: #d2c7ae;
-  --background-primary-inverse: #404040;
-  --background-secondary: #f2f2f2;
+  --base-color: #ca9f6aea;
+  --main-color: #475d6de0;
+  --accent-color: #d6620a;
+  --body-color: #ffffff;
+  --default-text-color: #ffffff;
+  --inverse-text-color: #474747;
+  --frame: #ffffff;
   --global-space: 5vw;
 }
 
 body {
   margin: 0px;
-  background-color: var(--background-base);
+  background-color: var(--body-color);
 }
 
 input {
   padding: 8px;
   margin: 2px;
-  background-color: var(--background-secondary);
+  background-color: var(--frame);
   filter: brightness(0.9);
   border: none;
   border-radius: 2px;
@@ -28,7 +26,7 @@ input {
 
 textarea {
   padding: 8px;
-  background-color: var(--background-secondary);
+  background-color: var(--frame);
   filter: brightness(0.9);
   border: none;
   border-radius: 2px;
@@ -40,11 +38,11 @@ ul {
 }
 
 h1 {
-  margin: 8px;
+  color: var(--inverse-text-color);
 }
 
 h2 {
-  background: linear-gradient(transparent 85%, var(--primary) 40%);
+  background: linear-gradient(transparent 85%, var(--accent-color) 40%);
   padding-bottom: 10px;
 }
 
@@ -63,8 +61,8 @@ textarea {
 }
 
 .header {
-  background-color: var(--background-primary-inverse);
-  padding: 10px;
+  background-color: var(--main-color);
+  padding: 5px 20px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -84,8 +82,8 @@ textarea {
   font-size: 16px;
   display: inline-block;
   padding: 10px 20px;
-  background-color: var(--primary);
-  color: var(--text-default);
+  background-color: var(--accent-color);
+  color: var(--default-text-color);
   text-align: left;
   border-radius: 5px;
   cursor: pointer;
@@ -95,21 +93,15 @@ textarea {
 }
 
 .btn a {
-  color: var(--text-default);
+  color: var(--default-text-color);
 }
 
 .btn:hover {
-  filter: brightness(1.2);
-}
-
-.sub-btn {
-  background-color: var(--primary-inverse);
-  padding: 5px 10px;
-  font-size: 13px;
+  filter: brightness(1.1);
 }
 
 .header-page {
-  padding: 10px;
+  padding: 0px 20px;
 }
 
 .inner {
@@ -126,48 +118,51 @@ textarea {
   text-align: right;
 }
 
-#account-menu ul {
+.account-menu ul {
   display: flex;
   justify-content: flex-end;
 }
 
-#account-menu li {
-  color: var(--text-default);
-  font-weight: bold;
-  margin-left: 15px;
-}
-
-#account-menu li a {
-  color: var(--text-default);
+.account-menu li {
+  color: var(--default-text-color);
   font-weight: bold;
 }
 
-#main-menu li {
+.account-menu li a {
+  color: var(--default-text-color);
+  font-weight: bold;
+}
+
+.navbar-link {
+  padding-left: 10px;
+}
+
+.main-menu li {
   position: relative;
   text-align: center;
 }
 
-#main-menu li a {
+.main-menu li a {
   width: 200px;
   margin-left: 20px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  background: var(--background-primary-inverse);
-  color: var(--text-default);
+  background: var(--main-color);
+  color: var(--default-text-color);
   font-weight: bold;
   padding-top: 0.8rem;
-  padding-bottom: 0.3rem;
+  padding-bottom: 0.5rem;
 }
 
-#main-menu li a.active {
-  background: var(--background-primary);
+.main-menu li a.active {
+  background: var(--base-color);
 }
 
-#main-menu li a:not(.active):hover {
+.main-menu li a:not(.active):hover {
   filter: brightness(1.2);
 }
 
-#thumbnails {
+.thumbnails {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -176,7 +171,7 @@ textarea {
 }
 
 .content {
-  color: var(--text-default);
+  color: var(--default-text-color);
 }
 
 .fixed-height-image {
@@ -200,12 +195,18 @@ textarea {
   border-radius: 50%;
 }
 
+.alert {
+  padding-left: 20px;
+}
+
 .alert-success {
-  color: green;
+  font-weight: bold;
+  color: green; /* 緑色のテキスト */
 }
 
 .alert-danger {
-  color: red;
+  font-weight: bold;
+  color: red; /* 赤色のテキスト */
 }
 
 .container {
@@ -216,11 +217,11 @@ textarea {
 }
 
 .container h1 {
-  color: var(--text-default);
+  color: var(--default-text-color);
 }
 
 .container h2 {
-  color: var(--text-default);
+  color: var(--default-text-color);
 }
 
 .container ul li {
@@ -234,13 +235,13 @@ textarea {
 }
 
 .main-content {
-  background-color: var(--background-primary);
+  background-color: var(--base-color);
   padding: 30px;
   flex: 1;
 }
 
 .side-content {
-  background-color: var(--background-primary-inverse);
+  background-color: var(--main-color);
   min-width: 400px;
   padding: 0px 20px;
   position: sticky;
@@ -250,17 +251,11 @@ textarea {
 }
 
 .center-content {
-  background-color: var(--background-primary);
+  background-color: var(--base-color);
   width: 600px;
   padding: 20px 20px;
   margin: 10px;
   border-radius: 5px;
-}
-
-@media (max-width: 1000px) {
-  .container {
-    flex-direction: column;
-  }
 }
 
 .list {
@@ -270,16 +265,11 @@ textarea {
 }
 
 .frame {
-  color: var(--text-inverse);
-  background-color: var(--background-secondary);
+  color: var(--inverse-text-color);
+  background-color: var(--frame);
   padding: 16px;
   border-radius: 8px;
   transition: all 0.3s ease;
-}
-
-#index .frame:hover {
-  filter: brightness(1.2);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .frame p {
@@ -300,12 +290,50 @@ textarea {
 }
 
 .travel_time {
-  background-color: var(--background-base);
+  background-color: var(--main-color);
+  color: var(--default-text-color);
   padding: 10px 15px;
   margin: 10px 0;
   border-radius: 5px;
   font-weight: bold;
   width: 130px;
+}
+
+.information {
+  color: var(--default-text-color);
+}
+
+.logo-icon {
+  height: 40px;
+  width: auto;
+}
+
+.logo-text {
+  padding-left: 10px;
+  color: var(--default-text-color);
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.logo-container {
+  text-align: center;
+}
+
+.logo-full {
+  height: 150px;
+  width: auto;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 870px) {
+  .collapse-on-small {
+    display: none;
+  }
 }
 
 @media (min-width: 640px) {
@@ -322,24 +350,7 @@ textarea {
   .timeline-content {
     width: 75%;
     float: left;
-    border-left: 3px var(--background-base) solid;
+    border-left: 3px var(--base-color) solid;
     padding-left: 30px;
-  }
-}
-
-.information {
-  color: var(--text-default);
-}
-
-.logo {
-  padding-left: 10px;
-  color: var(--text-default);
-  font-weight: bold;
-  font-size: 30px;
-}
-
-@media (max-width: 930px) {
-  .left.logo {
-    display: none;
   }
 }

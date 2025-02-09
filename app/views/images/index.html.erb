@@ -7,7 +7,7 @@
     <% end %>
     <% @grouped_images.each do |date, images| %>
       <h2><%= date.strftime("%Y年%m月%d日") %></h2>
-      <div class="frame" id="thumbnails">
+      <div class="frame thumbnails">
         <% images.each do |image| %>
           <%= link_to image_path(image) do %>
             <%= image_tag image.file, alt: image.image_name, class: "fixed-height-image", loading: "lazy" %>
