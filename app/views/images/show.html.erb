@@ -6,7 +6,10 @@
       </div>
       <div class="information right">
         <% if @image.date_of_shooting %>
-          <strong><%= @image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></strong>
+          <strong><%= @image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></strong><br>
+        <% end %>
+        <% if @image.address %>
+          <strong><%= @image.address %></strong>
         <% end %>
       </div>
     </div>
@@ -24,7 +27,7 @@
     <div class="frame">
       <%= @image.memo.presence || t('views.common.no_data', name: Image.human_attribute_name(:memo)) %>
       <% if @image.memo_image.attached? %>
-        <%= image_tag @image.memo_image, class: "fixed-height-image" %>
+        <p><%= image_tag @image.memo_image, class: "fixed-height-image" %></p>
       <% end %>
     </div>
   </div>

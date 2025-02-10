@@ -56,6 +56,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_22_040156) do
     t.float "latitude"
     t.float "longitude"
     t.datetime "date_of_shooting"
+    t.string "address"
+    t.json "weather"
     t.integer "journal_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false

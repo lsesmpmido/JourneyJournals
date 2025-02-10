@@ -2,6 +2,8 @@
 
 require 'mini_exiftool'
 require 'time'
+require 'geocoder'
+Geocoder.configure(language: :ja)
 
 class ImagesController < ApplicationController
   before_action :set_image, only: %i[show edit update destroy]
@@ -27,13 +29,14 @@ class ImagesController < ApplicationController
     @image = current_user.images.new(image_params)
     @image.user_id = current_user.id
     @image.image_name = @image.image_name.presence || @image.file.filename.to_s
-
     if @image.save
       exif = extract_exif_from_image(@image)
       if exif
         if exif.gpslatitude && exif.gpslongitude
           @image.latitude = convert_to_decimal(exif.gpslatitude)
           @image.longitude = convert_to_decimal(exif.gpslongitude)
+          result = Geocoder.search([@image.latitude, @image.longitude]).first.address
+          @image.address = result.split(', ').slice(0..-3).reverse.join(' ')
         end
         @image.date_of_shooting = exif.date_time_original || exif.create_date
         @image.save
@@ -45,12 +48,15 @@ class ImagesController < ApplicationController
   end
 
   def update
-    respond_to do |_format|
-      if @image.update(image_params)
-        redirect_to @image, notice: t('controllers.common.notice_update', name: Image.model_name.human)
-      else
-        render :edit, status: :unprocessable_entity
+    if @image.update(image_params)
+      if @image.latitude || @image.longitude
+        result = Geocoder.search([@image.latitude, @image.longitude]).first.address
+        @image.address = result.split(', ').slice(0..-3).reverse.join(' ')
+        @image.save
       end
+      redirect_to @image, notice: t('controllers.common.notice_update', name: Image.model_name.human)
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -67,7 +73,7 @@ class ImagesController < ApplicationController
   end
 
   def image_params
-    params.require(:image).permit(:image_name, :memo, :file, :latitude, :longitude, :date_of_shooting, :memo_image, :journal_id)
+    params.require(:image).permit(:image_name, :memo, :file, :latitude, :longitude, :date_of_shooting, :address, :weather, :memo_image, :journal_id)
   end
 
   def extract_exif_from_image(image)

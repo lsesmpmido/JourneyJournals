@@ -10,8 +10,8 @@
         <%= link_to journal_path(journal) do %>
           <div class="frame">
             <p><strong><%= journal.journal_name %></strong></p>
-            <p><%= journal.description %></p>
-            <p><%= journal.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></p>
+            <p class="sub_text"><%= journal.description %></p>
+            <p class="sub_text"><%= journal.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></p>
           </div>
         <% end %>
       <% end %>

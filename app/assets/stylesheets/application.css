@@ -327,6 +327,17 @@ textarea {
   width: auto;
 }
 
+.sub_text {
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.ellipsis {
+  width: 60ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media (max-width: 1000px) {
   .container {
     flex-direction: column;

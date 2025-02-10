@@ -11,8 +11,7 @@
 
     <h2><%= @journal.journal_name %></h2>
     <div class="frame">
-      <%= @journal.description.presence || t('views.common.no_data', name: Journal.human_attribute_name(:description)) %>
-      <div class="map"></div>
+      <p><%= @journal.description.presence || t('views.common.no_data', name: Journal.human_attribute_name(:description)) %><p>
     </div>
 
     <h2><%= t('views.journal.activity_record') %></h2>
@@ -47,9 +46,9 @@
                 <%= link_to image_path(image) do %>
                   <div class="frame sub-frame inner">
                     <div class="left">
-                      <%= image.image_name %><br>
-                      <% if image.latitude && image.longitude %>
-                        <%= t('views.image.location_of_shooting') %>:<%= " (#{image.latitude}, #{image.longitude})" %>
+                      <p><%= image.image_name %></p>
+                      <% if image.address %>
+                        <p class="sub_text ellipsis"><%= "#{image.address}" %></p>
                       <% end %>
                     </div>
                     <div class="right">
