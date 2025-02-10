@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="main-content">
+    <%= form_with model: [@commentable, @comment], url: polymorphic_path([@commentable, @comment]), method: :patch do |f| %>
+      <div class="frame">
+        <%= f.text_area :content, required: true %>
+        <%= f.submit class: "btn" %>
+      </div>
+    <% end %>
+  </div>
+</div>

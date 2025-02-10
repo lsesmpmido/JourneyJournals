@@ -3,11 +3,17 @@
     <ul>
       <% comments.each do |comment| %>
         <% if comment.persisted? %>
-          <li class="frame sub-frame">
-            <%= comment.content %><br>
-
+          <li id="comment_<%= comment.id %>" class="frame sub-frame">
+            <strong><%= comment.user.user_name %></strong><br>
+            <p><%= comment.content %></p>
+            <p><span class="sub_text"><%= comment.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></span><br>
             <% if current_user == comment.user %>
-              <%= button_to t('views.common.destroy', name: Comment.model_name.human), polymorphic_path([commentable, comment]), method: :delete, form: { data: { turbo_confirm: t('views.common.delete_confirm') } }, class: "btn sub-btn" %>
+              <div class="horizontal">
+                <%= button_to t('views.common.destroy', name: Comment.model_name.human), polymorphic_path([commentable, comment]), method: :delete, form: { data: { turbo_confirm: t('views.common.delete_confirm') } }, class: "btn sub-btn" %>
+                <%= link_to t('views.common.edit', name: Comment.model_name.human),
+                  (commentable.is_a?(Image) ? edit_image_comment_path(commentable, comment) : edit_journal_comment_path(commentable, comment)),
+                  class: "btn sub-btn" %>
+              </div>
             <% end %>
           </li>
         <% end %>

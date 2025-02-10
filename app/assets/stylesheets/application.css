@@ -102,6 +102,11 @@ textarea {
   filter: brightness(1.1);
 }
 
+.sub-btn {
+  background-color: var(--main-color);
+  font-size: 13px;
+}
+
 .header-page {
   padding: 0px 20px;
 }
@@ -342,7 +347,7 @@ textarea {
   }
 }
 
-@media (max-width: 870px) {
+@media (max-width: 900px) {
   .collapse-on-small {
     display: none;
   }

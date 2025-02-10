@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  before_action :set_comment, only: :destroy
+  before_action :set_comment, only: %i[edit update destroy]
+  before_action :set_commentable, only: %i[create edit update]
 
   def create
     @comment = @commentable.comments.build(comment_params)
@@ -13,6 +14,21 @@ class CommentsController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update
+    if current_user != @comment.user
+      redirect_to @commentable, alert: t('controllers.common.not_authorized')
+      return
+    end
+
+    if @comment.update(comment_params)
+      redirect_to @commentable, notice: t('controllers.common.notice_update', name: Comment.model_name.human)
+    else
+      render :edit
+    end
+  end
+
   def destroy
     return if current_user != @comment.user
 
@@ -21,6 +37,14 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def set_commentable
+    @commentable = if params[:image_id]
+                     Image.find(params[:image_id])
+                   elsif params[:journal_id]
+                     Journal.find(params[:journal_id])
+                   end
+  end
 
   def set_comment
     @comment = Comment.find(params[:id])
