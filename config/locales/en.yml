@@ -24,6 +24,7 @@ en:
   views:
     image:
       location_of_shooting: Location of shooting
+      associated_journal: Associated journal
     journal:
       activity_record: Activity record
       elapsed_time: Elapsed time

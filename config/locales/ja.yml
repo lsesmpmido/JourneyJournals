@@ -25,6 +25,7 @@ ja:
   views:
     image:
       location_of_shooting: 撮影場所
+      associated_journal: 関連する旅行記
     journal:
       activity_record: 行動記録
       elapsed_time: 経過時間

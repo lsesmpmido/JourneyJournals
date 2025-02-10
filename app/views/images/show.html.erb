@@ -30,6 +30,14 @@
         <p><%= image_tag @image.memo_image, class: "fixed-height-image" %></p>
       <% end %>
     </div>
+
+    <h2><%= t('views.image.associated_journal') %></h2>
+    <div class="frame">
+      <p><%= @image.journal.journal_name %></p>
+      <div class="btn">
+        <%= link_to t('views.common.title_show', name: Journal.model_name.human ), journal_path(@image.journal) %>
+      </div>
+    </div>
   </div>
 
   <div class="side-content">

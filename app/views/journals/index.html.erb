@@ -8,10 +8,17 @@
     <div id="index" class="list">
       <% @journals.each do |journal| %>
         <%= link_to journal_path(journal) do %>
-          <div class="frame">
-            <p><strong><%= journal.journal_name %></strong></p>
-            <p class="sub_text"><%= journal.description %></p>
-            <p class="sub_text"><%= journal.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></p>
+          <div class="frame inner">
+            <div class="left">
+              <p><strong><%= journal.journal_name %></strong></p>
+              <p class="sub_text"><%= journal.description %></p>
+              <p class="sub_text"><%= journal.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></p>
+            </div>
+            <div class="right horizontal">
+              <% journal.images.limit(3).each do |image| %>
+                <%= image_tag image.file, alt: image.image_name, class: "fixed-height-image small-image", loading: "lazy" %>
+              <% end %>
+            </div>
           </div>
         <% end %>
       <% end %>
