@@ -9,8 +9,8 @@ class ImagesController < ApplicationController
   before_action :set_image, only: %i[show edit update destroy]
 
   def index
-    @images = Image.all.includes(:journal)
-    @grouped_images = @images.group_by { |image| image.created_at.to_date }
+    @images = Image.all.includes(:journal).order(:date_of_shooting)
+    @grouped_images = @images.group_by { |image| image.date_of_shooting.in_time_zone('Asia/Tokyo').to_date }
   end
 
   def show
@@ -48,6 +48,12 @@ class ImagesController < ApplicationController
   end
 
   def update
+    if params[:image][:date_of_shooting].present?
+      Time.zone = 'Asia/Tokyo'
+      date_in_tokyo = Time.zone.parse(params[:image][:date_of_shooting])
+      @image.date_of_shooting = date_in_tokyo.utc
+    end
+
     if @image.update(image_params)
       if @image.latitude || @image.longitude
         result = Geocoder.search([@image.latitude, @image.longitude]).first.address

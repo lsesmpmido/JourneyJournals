@@ -6,7 +6,7 @@
       </div>
     <% end %>
     <% @grouped_images.each do |date, images| %>
-      <h2><%= date.strftime("%Y年%m月%d日") %></h2>
+      <h2><%= date.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日") %></h2>
       <div class="frame thumbnails">
         <% images.each do |image| %>
           <%= link_to image_path(image) do %>
