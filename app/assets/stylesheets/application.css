@@ -62,6 +62,11 @@ textarea {
   min-height: 100px;
 }
 
+.frame h3 {
+  color: var(--default-text-color);
+  background-color: var(--main-color);
+}
+
 .header {
   background-color: var(--main-color);
   padding: 5px 20px;
@@ -286,6 +291,7 @@ textarea {
 
 .frame p {
   margin: 8px 0;
+  white-space: pre-line;
 }
 
 .frame p strong {

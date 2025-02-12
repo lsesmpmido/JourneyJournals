@@ -12,7 +12,17 @@
             <div class="left">
               <p><strong><%= journal.journal_name %></strong></p>
               <p class="sub_text"><%= journal.description %></p>
-              <p class="sub_text"><%= journal.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></p>
+              <% if journal.images.any? %>
+                <% images = journal.images.includes(:journal).order(:date_of_shooting) %>
+                <% first_image = images.first %>
+                <% last_image = images.last %>
+                <% if first_image.date_of_shooting.present? && last_image.date_of_shooting.present? %>
+                  <div class="sub_text">
+                    <%= first_image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %>
+                    <%= last_image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime(" ~ %Y年%m月%d日 %H時%M分") %>
+                  </div>
+                <% end %>
+              <% end %>
             </div>
             <div class="right horizontal">
               <% journal.images.limit(3).each do |image| %>

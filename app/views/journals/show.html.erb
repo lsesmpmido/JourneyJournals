@@ -5,7 +5,16 @@
         <%= link_to t('views.common.edit', name: Journal.model_name.human.downcase), edit_journal_path(@journal) %>
       </div>
       <div class="information right">
-        <strong><%= @journal.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></strong>
+        <% if @journal.images.any? %>
+          <% if @images.first.date_of_shooting.present? && @images.last.date_of_shooting.present? %>
+            <strong>
+              <p>
+              <%= @images.first.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %>
+              <%= @images.last.date_of_shooting.in_time_zone('Asia/Tokyo').strftime(" ~ %Y年%m月%d日 %H時%M分") %>
+              </p>
+            </strong>
+          <% end %>
+        <% end %>
       </div>
     </div>
 
@@ -21,7 +30,7 @@
       </div>
       <% @grouped_images.each do |date, images| %>
         <% if images.present? %>
-          <h3><%= date %></h3>
+          <h3 class="frame"><%= date %></h3>
         <% end %>
 
         <ul class="activity_record timeline">
@@ -42,11 +51,11 @@
               </p>
 
               <div class="timeline-content">
-
                 <%= link_to image_path(image) do %>
                   <div class="frame sub-frame inner">
                     <div class="left">
                       <p><%= image.image_name %></p>
+                      <p class="sub_text"><%= image.memo %></p>
                       <% if image.address %>
                         <p class="sub_text"><%= "#{image.address}" %></p>
                       <% end %>

@@ -25,7 +25,7 @@
 
     <h2><%= t(Image.human_attribute_name(:memo)) %></h2>
     <div class="frame">
-      <%= @image.memo.presence || t('views.common.no_data', name: Image.human_attribute_name(:memo)) %>
+      <p><%= @image.memo.presence || t('views.common.no_data', name: Image.human_attribute_name(:memo)) %></p>
       <% if @image.memo_image.attached? %>
         <p><%= image_tag @image.memo_image, class: "fixed-height-image" %></p>
       <% end %>
