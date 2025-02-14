@@ -4,6 +4,7 @@ require 'mini_exiftool'
 
 class JournalsController < ApplicationController
   before_action :set_journal, only: %i[show edit update destroy]
+  before_action :check_ownership, only: %i[edit update destroy]
 
   def index
     @journals = Journal.all
@@ -115,5 +116,11 @@ class JournalsController < ApplicationController
     decimal = -decimal if %w[S W].include?(direction)
 
     decimal.round(4)
+  end
+
+  def check_ownership
+    return if @journal.user_id == current_user.id
+
+    redirect_to journals_url, alert: t('controllers.common.alert_not_owner', name: Journal.model_name.human)
   end
 end

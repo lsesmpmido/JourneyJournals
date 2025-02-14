@@ -7,6 +7,7 @@ Geocoder.configure(language: :ja)
 
 class ImagesController < ApplicationController
   before_action :set_image, only: %i[show edit update destroy]
+  before_action :check_ownership, only: %i[edit update destroy]
 
   def index
     @images = Image.all.includes(:journal).order(:date_of_shooting)
@@ -107,5 +108,11 @@ class ImagesController < ApplicationController
     decimal = -decimal if %w[S W].include?(direction)
 
     decimal.round(4)
+  end
+
+  def check_ownership
+    return if @image.journal.user_id == current_user.id
+
+    redirect_to images_url, alert: t('controllers.common.alert_not_owner', name: Image.model_name.human)
   end
 end

@@ -1,19 +1,22 @@
 <div class="container">
   <div class="main-content">
     <div class="inner">
-      <div class="btn left">
-        <%= link_to t('views.common.edit', name: Journal.model_name.human.downcase), edit_journal_path(@journal) %>
-      </div>
-      <div class="information right">
+      <div class="information left">
+        <strong><%= @journal.user.user_name %></strong>
         <% if @journal.images.any? %>
           <% if @images.first.date_of_shooting.present? && @images.last.date_of_shooting.present? %>
             <strong>
-              <p>
-              <%= @images.first.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %>
+              <%= @images.first.date_of_shooting.in_time_zone('Asia/Tokyo').strftime(", %Y年%m月%d日 %H時%M分") %>
               <%= @images.last.date_of_shooting.in_time_zone('Asia/Tokyo').strftime(" ~ %Y年%m月%d日 %H時%M分") %>
-              </p>
             </strong>
           <% end %>
+        <% end %>
+      </div>
+      <div class="right">
+        <% if @journal.user == current_user %>
+          <div class="btn">
+            <%= link_to t('views.common.edit', name: Journal.model_name.human.downcase), edit_journal_path(@journal) %>
+          </div>
         <% end %>
       </div>
     </div>
@@ -25,9 +28,11 @@
 
     <h2><%= t('views.journal.activity_record') %></h2>
     <div class="frame">
-      <div class="btn">
-        <%= link_to t('views.common.new', name: Image.model_name.human.downcase), new_journal_image_path(@journal) %>
-      </div>
+      <% if @journal.user == current_user %>
+        <div class="btn">
+          <%= link_to t('views.common.new', name: Image.model_name.human.downcase), new_journal_image_path(@journal) %>
+        </div>
+      <% end %>
       <% @grouped_images.each do |date, images| %>
         <% if images.present? %>
           <h3 class="frame"><%= date %></h3>

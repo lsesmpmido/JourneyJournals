@@ -1,15 +1,20 @@
 <div class="container">
   <div class="main-content">
     <div class="inner">
-      <div class="btn left">
-        <%= link_to t('views.common.edit', name: i18n_pluralize(Image.model_name.human.downcase)), edit_image_path(@image) %>
-      </div>
-      <div class="information right">
+      <div class="information left">
+        <strong><%= @image.journal.user.user_name %></strong>
         <% if @image.date_of_shooting %>
-          <strong><%= @image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></strong><br>
+          <strong><%= @image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime(", %Y年%m月%d日 %H時%M分") %></strong><br>
         <% end %>
         <% if @image.address %>
           <strong><%= @image.address %></strong>
+        <% end %>
+      </div>
+      <div class="right">
+        <% if @image.journal.user == current_user %>
+          <div class="btn">
+            <%= link_to t('views.common.edit', name: i18n_pluralize(Image.model_name.human.downcase)), edit_image_path(@image) %>
+          </div>
         <% end %>
       </div>
     </div>

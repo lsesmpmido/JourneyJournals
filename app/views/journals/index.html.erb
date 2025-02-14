@@ -18,7 +18,7 @@
                   <% images = journal.images.includes(:journal).order(:date_of_shooting) %>
                   <% first_image = images.first %>
                   <% last_image = images.last %>
-                  <%= first_image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime(" %Y年%m月%d日 %H時%M分") %>
+                  <%= first_image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime(", %Y年%m月%d日 %H時%M分") %>
                   <%= last_image.date_of_shooting.in_time_zone('Asia/Tokyo').strftime(" ~ %Y年%m月%d日 %H時%M分") %>
                 <% end %>
               </div>

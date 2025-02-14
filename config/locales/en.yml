@@ -58,6 +58,7 @@ en:
       notice_create: "%{name} was successfully created."
       notice_update: "%{name} was successfully updated."
       notice_destroy: "%{name} was successfully destroyed."
+      alert_not_owner: "Only the creator can edit the %{name}."
   devise:
     registrations:
       edit:

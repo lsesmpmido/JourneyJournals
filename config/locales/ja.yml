@@ -59,6 +59,7 @@ ja:
       notice_create: "%{name}が作成されました。"
       notice_update: "%{name}が更新されました。"
       notice_destroy: "%{name}が削除されました。"
+      alert_not_owner: "作成者以外は%{name}を編集できません"
   devise:
     registrations:
       edit:
