@@ -10,18 +10,4 @@
   <div class="frame">
     <%= form.text_area :description %>
   </div>
-
-  <div class "list">
-  <% if @journal.new_record? %>
-    <h2><%= i18n_pluralize(Image.model_name.human) %></h2>
-    <div class="frame">
-      <%= form.fields_for :images do |image_form| %>
-        <div>
-          <%= image_form.label :file %>
-          <%= image_form.file_field :file %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-  </div>
 <% end %>

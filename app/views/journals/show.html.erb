@@ -55,10 +55,12 @@
                   <div class="frame sub-frame inner">
                     <div class="left">
                       <p><%= image.image_name %></p>
-                      <p class="sub_text"><%= image.memo %></p>
-                      <% if image.address %>
-                        <p class="sub_text"><%= "#{image.address}" %></p>
-                      <% end %>
+                      <div class="sub-text">
+                        <p><%= image.memo %></p>
+                        <% if image.address %>
+                          <p><%= "#{image.address}" %></p>
+                        <% end %>
+                      </div>
                     </div>
                     <div class="right">
                       <%= image_tag image.file, alt: image.image_name, class: "fixed-height-image small-image", loading: "lazy" %>

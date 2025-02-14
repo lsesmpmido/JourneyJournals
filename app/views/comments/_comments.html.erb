@@ -6,7 +6,7 @@
           <li id="comment_<%= comment.id %>" class="frame sub-frame">
             <strong><%= comment.user.user_name %></strong><br>
             <p><%= comment.content %></p>
-            <p><span class="sub_text"><%= comment.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></span><br>
+            <p><span class="sub-text"><%= comment.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></span><br>
             <% if current_user == comment.user %>
               <div class="horizontal">
                 <%= button_to t('views.common.destroy', name: Comment.model_name.human), polymorphic_path([commentable, comment]), method: :delete, form: { data: { turbo_confirm: t('views.common.delete_confirm') } }, class: "btn sub-btn" %>
